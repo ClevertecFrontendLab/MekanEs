@@ -1,0 +1,72 @@
+.Header {
+    background: var(--primary-light-1);
+    padding: 16px 24px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 14px;
+    align-items: flex-start;
+}
+@media (max-width: 480px) {
+    .content {
+        padding-top: 18px;
+    }
+}
+
+h1.title {
+    padding: 0;
+    margin-bottom: 5px;
+    max-width: 900px;
+    letter-spacing: 0.2px;
+}
+@media (max-width: 834px) {
+    h1.title {
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: 0;
+        min-width: 473px;
+    }
+}
+@media (max-width: 480px) {
+    h1.title {
+        font-size: 20px;
+        min-width: 100px;
+        width: 300px;
+        padding-top: 6px;
+    }
+}
+
+.settingsBtn {
+    border: none;
+    background: none;
+}
+
+button.settings {
+    line-height: 130%;
+    padding: 0 14px;
+    height: auto;
+    background: none;
+}
+@media (max-width: 834px) {
+    button.settings {
+        padding: 0 14px 0 4px;
+        svg {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    button.settings {
+        background: white;
+        padding: 7px 4px;
+        svg {
+            display: block;
+        }
+        .ant-typography {
+            display: none;
+        }
+    }
+}
