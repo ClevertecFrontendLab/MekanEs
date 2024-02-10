@@ -21,7 +21,7 @@ export const AppHeader: FC<AppHeaderProps> = ({ mobile }) => {
                     type={mobile ? 'default' : 'text'}
                     shape='circle'
                     icon={<SettingOutlined />}
-                    className={styles.settings}
+                    className={styles.settingsBtn}
                 >
                     {mobile ? null : (
                         <Typography.Text style={{ wordBreak: 'normal' }}>Настройки</Typography.Text>

@@ -1,10 +1,10 @@
 import { FC, Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
-import { Sidebar } from '@components/Sidebar/Sidebar';
+
 import styles from './Layout.module.css';
-import { AppHeader } from '@components/Header/Header';
-import { AppFooter } from '@components/Footer/Footer';
+import { AppFooter, AppHeader, Sidebar } from '@components/index';
+
 const { Header, Content } = Layout;
 export const AppLayout: FC = () => {
     const [mobile, setMobile] = useState(false);

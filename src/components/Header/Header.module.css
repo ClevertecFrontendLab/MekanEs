@@ -46,19 +46,14 @@ h1.title {
     }
 }
 
-.settingsBtn {
-    border: none;
-    background: none;
-}
-
-button.settings {
+button.settingsBtn {
     line-height: 130%;
     padding: 0 14px;
     height: auto;
     background: none;
 }
 @media (max-width: 1024px) {
-    button.settings {
+    button.settingsBtn {
         padding: 0 14px 0 4px;
         svg {
             display: none;

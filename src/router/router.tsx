@@ -1,6 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { AppLayout } from './Layout';
-import { MainPage } from '@pages/main-page';
+import { MainPage } from '@pages/index';
 
 export const router = createBrowserRouter(
     createRoutesFromElements(

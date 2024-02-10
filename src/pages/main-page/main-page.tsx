@@ -3,7 +3,7 @@ import styles from './main-page.module.css';
 import { Button, Typography } from 'antd';
 
 import clx from 'classnames';
-import { CalendarTwoTone, HeartFilled, IdcardFilled } from '@ant-design/icons';
+import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
 
 export const MainPage: React.FC = () => {
     return (
@@ -82,7 +82,7 @@ export const MainPage: React.FC = () => {
                     <div className={clx(styles.block, styles.center)}>
                         <Button
                             type='text'
-                            icon={<IdcardFilled style={{ color: 'var(--primary-light-6)' }} />}
+                            icon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
                             className='buttonWithIcon'
                         >
                             Профиль

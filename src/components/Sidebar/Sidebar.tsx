@@ -1,20 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import styles from './Sidebar.module.css';
-import {
-    CalendarOutlined,
-    HeartFilled,
-    IdcardOutlined,
-    TrophyFilled,
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { Divider, Menu } from 'antd';
+import { Divider } from 'antd';
 import ExitIcon from '../../assets/icons/exit.svg?react';
 import FullLogo from '../../assets/icons/logo-full.svg?react';
 
 import ShortLogo from '../../assets/icons/logo-short.svg?react';
 import { Button, Layout } from 'antd';
 import clx from 'classnames';
+import AppMenu from './Menu/Menu';
+import ToggleButton from './ToggleButton/ToggleButton';
 
 const { Sider } = Layout;
 interface SidebarProps {
@@ -23,19 +17,21 @@ interface SidebarProps {
 }
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
     const [collapsed, setCollapsed] = useState(true);
-    const handleToggle = () => {
+    const handleToggle = useCallback(() => {
         if (mobile) {
             document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
         }
         setCollapsed((prev) => !prev);
+    }, [collapsed, mobile]);
+
+    const handleBreak = (broken: boolean) => {
+        setMobile(broken);
     };
 
     return (
         <Sider
             breakpoint='sm'
-            onBreakpoint={(e) => {
-                setMobile(e);
-            }}
+            onBreakpoint={handleBreak}
             trigger={null}
             width={mobile ? '106px' : '208px'}
             className={styles.Sidebar}
@@ -53,44 +49,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                         {collapsed ? <ShortLogo /> : <FullLogo />}
                     </div>
 
-                    <Menu
-                        className={clx(styles.menu)}
-                        mode={'vertical'}
-                        items={[
-                            {
-                                key: '1',
-                                icon: mobile ? null : (
-                                    <CalendarOutlined className={styles.menuItem} />
-                                ),
-                                label: 'Календарь',
-                                title: 'Календарь',
-                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
-                            },
-                            {
-                                key: '2',
-                                icon: mobile ? null : <HeartFilled className={styles.menuItem} />,
-                                label: 'Тренировки',
-                                title: 'Тренировки',
-                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
-                            },
-                            {
-                                key: '3',
-                                icon: mobile ? null : <TrophyFilled className={styles.menuItem} />,
-                                label: 'Достижения',
-                                title: 'Достижения',
-                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
-                            },
-                            {
-                                key: '4',
-                                icon: mobile ? null : (
-                                    <IdcardOutlined className={styles.menuItem} />
-                                ),
-                                label: 'Профиль',
-                                title: 'Профиль',
-                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
-                            },
-                        ]}
-                    />
+                    <AppMenu mobile={mobile} />
                 </div>
                 <div className={styles.exitContainer}>
                     <Divider style={{ margin: '0' }} />
@@ -103,18 +62,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                         {collapsed ? '' : 'Выход'}
                     </Button>
                 </div>
-                <div
-                    className={styles.toggle}
-                    data-test-id={mobile ? 'sider-switch-mobile' : 'sider-switch'}
-                >
-                    <Button
-                        onClick={handleToggle}
-                        className={styles.toggleBtn}
-                        type='text'
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        size={'small'}
-                    />
-                </div>
+                <ToggleButton handler={handleToggle} mobile={mobile} collapsed={collapsed} />
             </div>
         </Sider>
     );
