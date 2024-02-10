@@ -9,7 +9,7 @@
     padding-top: 14px;
     align-items: flex-start;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .content {
         padding-top: 18px;
     }
@@ -21,7 +21,7 @@ h1.title {
     max-width: 900px;
     letter-spacing: 0.2px;
 }
-@media (max-width: 834px) {
+@media (max-width: 1024px) {
     h1.title {
         font-weight: 600;
         font-size: 24px;
@@ -29,7 +29,15 @@ h1.title {
         min-width: 473px;
     }
 }
-@media (max-width: 480px) {
+
+@media (max-width: 700px) {
+    h1.title {
+        font-size: 20px;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 575px) {
     h1.title {
         font-size: 20px;
         min-width: 100px;
@@ -49,7 +57,7 @@ button.settings {
     height: auto;
     background: none;
 }
-@media (max-width: 834px) {
+@media (max-width: 1024px) {
     button.settings {
         padding: 0 14px 0 4px;
         svg {
@@ -58,7 +66,7 @@ button.settings {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     button.settings {
         background: white;
         padding: 7px 4px;

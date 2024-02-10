@@ -1,11 +1,12 @@
 .Footer {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
     padding: 0 24px;
     margin-bottom: 42px;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .Footer {
         flex-direction: column-reverse;
         gap: 24px;
@@ -28,7 +29,7 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
     width: 240px;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .rightSec {
         width: 100%;
         align-items: center;
@@ -52,7 +53,7 @@
     display: flex;
     padding: 12px 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .action {
         justify-content: space-between;
         width: 100%;

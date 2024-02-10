@@ -3,7 +3,7 @@
     background: var(--character-light-primary-inverse);
     position: relative;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .Sidebar {
         position: absolute;
         height: 100%;
@@ -23,7 +23,7 @@
     padding-top: 10px;
     gap: 5px;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .menu {
         padding-top: 10px;
         gap: 0;
@@ -47,7 +47,7 @@
     padding-left: 14px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .exitBtn {
         justify-content: center;
     }
@@ -93,7 +93,7 @@
     align-items: center;
     box-shadow: 0 2px 8px 0 rgba(36, 36, 36, 0.15);
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .toggle {
         top: 24px;
         width: 32px;

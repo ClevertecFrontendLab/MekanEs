@@ -4,7 +4,7 @@
 
     width: 752px;
 }
-@media (max-width: 834px) {
+@media (max-width: 1024px) {
     .main-page {
         width: 100%;
     }
@@ -39,7 +39,14 @@
     gap: 16px;
     margin-top: 16px;
 }
-@media (max-width: 480px) {
+
+@media (max-width: 830px) {
+    .containers {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 575px) {
     .containers {
         flex-direction: column;
         row-gap: 8px;
@@ -54,7 +61,7 @@
     padding: 24px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .large {
         padding: 16px 22px 16px 16px;
     }
@@ -67,7 +74,7 @@
     width: 100%;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .small {
         width: 100%;
         max-width: 100%;
@@ -90,7 +97,7 @@
 .block > h5 {
     margin: 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .block {
         justify-content: center;
     }

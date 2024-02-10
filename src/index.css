@@ -89,6 +89,10 @@
 
     --font-family: 'Inter', sans-serif;
     --second-family: 'Roboto', sans-serif;
+
+    /* breakpoints */
+
+    ---tablet: 1024px;
 }
 
 body {

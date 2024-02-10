@@ -24,13 +24,15 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
     const [collapsed, setCollapsed] = useState(true);
     const handleToggle = () => {
-        document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
+        if (mobile) {
+            document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
+        }
         setCollapsed((prev) => !prev);
     };
 
     return (
         <Sider
-            breakpoint='xs'
+            breakpoint='sm'
             onBreakpoint={(e) => {
                 setMobile(e);
             }}
@@ -62,21 +64,21 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                                 ),
                                 label: 'Календарь',
                                 title: 'Календарь',
-                                style: mobile ? { paddingLeft: '8px', marginTop: '2px' } : {},
+                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
                             },
                             {
                                 key: '2',
                                 icon: mobile ? null : <HeartFilled className={styles.menuItem} />,
                                 label: 'Тренировки',
                                 title: 'Тренировки',
-                                style: mobile ? { paddingLeft: '8px', marginTop: '2px' } : {},
+                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
                             },
                             {
                                 key: '3',
                                 icon: mobile ? null : <TrophyFilled className={styles.menuItem} />,
                                 label: 'Достижения',
                                 title: 'Достижения',
-                                style: mobile ? { paddingLeft: '8px', marginTop: '2px' } : {},
+                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
                             },
                             {
                                 key: '4',
@@ -85,7 +87,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                                 ),
                                 label: 'Профиль',
                                 title: 'Профиль',
-                                style: mobile ? { paddingLeft: '8px', marginTop: '2px' } : {},
+                                style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},
                             },
                         ]}
                     />

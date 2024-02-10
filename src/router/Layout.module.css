@@ -4,13 +4,13 @@
     background-size: cover;
     min-height: 1020px;
 }
-@media (max-width: 834px) {
+@media (max-width: 1024px) {
     .Layout {
         min-height: 1194px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .Layout {
         min-height: 640px;
     }
@@ -24,7 +24,7 @@
     padding: 24px;
     flex: auto;
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
     .content {
         padding: 24px 16px;
     }
