@@ -1,34 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+import styles from './main-page.module.css';
+import { Typography } from 'antd';
 
-import reactLogo from '/react.svg';
-import viteLogo from '/vite.svg';
-import tsLogo from '/ts.svg';
-import './main-page.css';
+import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
+import { ActionCard, TextContainer } from '@components/index';
 
 export const MainPage: React.FC = () => {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-                <a href='https://www.typescriptlang.org/' target='_blank'>
-                    <img src={tsLogo} className='logo' alt='TS logo' />
-                </a>
+        <div className={styles['main-page']}>
+            <TextContainer className={styles.large}>
+                <Typography.Text
+                    style={{
+                        color: 'var(--primary-light-9)',
+                        fontSize: '16px',
+                    }}
+                >
+                    С CleverFit ты сможешь: <br />
+                    — планировать свои тренировки на календаре, выбирая тип и уровень нагрузки;
+                    <br />— отслеживать свои достижения в разделе статистики, сравнивая свои
+                    результаты с нормами и рекордами;
+                    <br />— создавать свой профиль, где ты можешь загружать свои фото, видео и
+                    отзывы о тренировках;
+                    <br />— выполнять расписанные тренировки для разных частей тела, следуя
+                    подробным инструкциям и советам профессиональных тренеров.
+                </Typography.Text>
+            </TextContainer>
+
+            <TextContainer className={styles.large}>
+                <Typography.Title level={4} style={{ fontWeight: '500', marginBottom: '0' }}>
+                    CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не
+                    откладывай на завтра — начни тренироваться уже сегодня!
+                </Typography.Title>
+            </TextContainer>
+
+            <div className={styles.containers}>
+                <ActionCard
+                    title='Расписать тренировки'
+                    buttonText='Тренировки'
+                    icon={<HeartFilled style={{ color: 'var(--primary-light-6)' }} />}
+                />
+                <ActionCard
+                    title='Назначить календарь'
+                    buttonText='Календарь'
+                    icon={<CalendarTwoTone twoToneColor={['#2f54eb', '#2f54eb']} />}
+                />
+                <ActionCard
+                    title='Заполнить профиль'
+                    buttonText='Профиль'
+                    icon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
+                />
             </div>
-            <h1>Vite + React + TS</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/pages/main-page.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </>
+        </div>
     );
 };
