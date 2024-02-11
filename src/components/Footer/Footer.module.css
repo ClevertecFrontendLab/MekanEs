@@ -1,10 +1,16 @@
 .Footer {
     display: flex;
     align-items: flex-end;
-    flex-wrap: wrap-reverse;
+
     justify-content: space-between;
     padding: 0 24px;
     margin-bottom: 42px;
+}
+
+@media (max-width: 800px) {
+    .Footer {
+        flex-wrap: wrap-reverse;
+    }
 }
 @media (max-width: 575px) {
     .Footer {

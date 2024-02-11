@@ -1,0 +1,30 @@
+.small {
+    padding: 0;
+    min-width: 182px;
+    max-width: 240px;
+    width: 100%;
+}
+
+@media (max-width: 575px) {
+    .small {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.block {
+    margin: 0 auto;
+    background: var(--character-light-primary-inverse);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.block > h5 {
+    margin: 0;
+}
+@media (max-width: 575px) {
+    .block {
+        justify-content: center;
+    }
+}

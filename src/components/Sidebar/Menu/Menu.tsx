@@ -2,7 +2,7 @@ import { FC } from 'react';
 import clx from 'classnames';
 import styles from '../Sidebar.module.css';
 import { Menu } from 'antd';
-import { CalendarOutlined, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
+import { CalendarTwoTone, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 
 interface AppMenuProps {
     mobile: boolean;
@@ -16,7 +16,7 @@ const AppMenu: FC<AppMenuProps> = ({ mobile }) => {
             items={[
                 {
                     key: '1',
-                    icon: mobile ? null : <CalendarOutlined className={styles.menuItem} />,
+                    icon: mobile ? null : <CalendarTwoTone twoToneColor={['#061178', '#061178']} />,
                     label: 'Календарь',
                     title: 'Календарь',
                     style: mobile ? { padding: '0 8px', marginTop: '2px' } : {},

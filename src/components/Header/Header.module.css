@@ -30,7 +30,7 @@ h1.title {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     h1.title {
         font-size: 20px;
         min-width: auto;
@@ -62,14 +62,11 @@ button.settingsBtn {
 }
 
 @media (max-width: 575px) {
-    button.settings {
+    button.settingsBtn {
         background: white;
         padding: 7px 4px;
         svg {
             display: block;
-        }
-        .ant-typography {
-            display: none;
         }
     }
 }

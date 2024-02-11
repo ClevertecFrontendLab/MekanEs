@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './main-page.module.css';
-import { Button, Typography } from 'antd';
+import { Typography } from 'antd';
 
-import clx from 'classnames';
 import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
+import { ActionCard, TextContainer } from '@components/index';
 
 export const MainPage: React.FC = () => {
     return (
         <div className={styles['main-page']}>
-            <div className={clx(styles.textContainer, styles.large)}>
+            <TextContainer className={styles.large}>
                 <Typography.Text
                     style={{
                         color: 'var(--primary-light-9)',
@@ -24,71 +24,31 @@ export const MainPage: React.FC = () => {
                     <br />— выполнять расписанные тренировки для разных частей тела, следуя
                     подробным инструкциям и советам профессиональных тренеров.
                 </Typography.Text>
-            </div>
-            <div className={clx(styles.textContainer, styles.large)}>
-                <Typography.Title
-                    level={4}
-                    style={{ fontWeight: '500', marginBottom: '0', lineHeight: '1.31' }}
-                >
+            </TextContainer>
+
+            <TextContainer className={styles.large}>
+                <Typography.Title level={4} style={{ fontWeight: '500', marginBottom: '0' }}>
                     CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не
                     откладывай на завтра — начни тренироваться уже сегодня!
                 </Typography.Title>
-            </div>
-            <div className={styles.containers}>
-                <div className={clx(styles.textContainer, styles.small)}>
-                    <div className={styles.block}>
-                        <Typography.Title level={5} style={{ fontWeight: '400' }}>
-                            Расписать тренировки
-                        </Typography.Title>
-                    </div>
-                    <div className={clx(styles.block, styles.center)}>
-                        <Button
-                            type='text'
-                            icon={<HeartFilled style={{ color: 'var(--primary-light-6)' }} />}
-                            className='buttonWithIcon'
-                        >
-                            Тренировки
-                        </Button>
-                    </div>
-                </div>
-                <div className={clx(styles.textContainer, styles.small)}>
-                    <div className={styles.block}>
-                        <Typography.Title level={5} style={{ fontWeight: '400' }}>
-                            Назначить календарь
-                        </Typography.Title>
-                    </div>
-                    <div className={clx(styles.block, styles.center)}>
-                        <Button
-                            type='text'
-                            icon={
-                                <CalendarTwoTone
-                                    twoToneColor={'#2f54eb'}
-                                    style={{ color: 'var(--primary-light-6)' }}
-                                />
-                            }
-                            className='buttonWithIcon'
-                        >
-                            Календарь
-                        </Button>
-                    </div>
-                </div>
-                <div className={clx(styles.textContainer, styles.small)}>
-                    <div className={styles.block}>
-                        <Typography.Title level={5} style={{ fontWeight: '400' }}>
-                            Заполнить провиль
-                        </Typography.Title>
-                    </div>
+            </TextContainer>
 
-                    <div className={clx(styles.block, styles.center)}>
-                        <Button
-                            type='text'
-                            icon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
-                            className='buttonWithIcon'
-                        >
-                            Профиль
-                        </Button>
-                    </div>
-                </div>
+            <div className={styles.containers}>
+                <ActionCard
+                    title='Расписать тренировки'
+                    buttonText='Тренировки'
+                    icon={<HeartFilled style={{ color: 'var(--primary-light-6)' }} />}
+                />
+                <ActionCard
+                    title='Назначить календарь'
+                    buttonText='Календарь'
+                    icon={<CalendarTwoTone twoToneColor={['#2f54eb', '#2f54eb']} />}
+                />
+                <ActionCard
+                    title='Заполнить профиль'
+                    buttonText='Профиль'
+                    icon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
+                />
             </div>
         </div>
     );

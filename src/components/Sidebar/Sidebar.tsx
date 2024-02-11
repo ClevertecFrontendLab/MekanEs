@@ -42,7 +42,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
             <div className={styles.sidebarContent}>
                 <div>
                     <div
-                        className={clx(collapsed ? styles.shortLogo : styles.logo, {
+                        className={clx({ [styles.shortLogo]: collapsed }, styles.logo, {
                             [styles.mobileLogo]: mobile,
                         })}
                     >
@@ -59,7 +59,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                         icon={mobile ? null : <ExitIcon />}
                         className={styles.exitBtn}
                     >
-                        {collapsed ? '' : 'Выход'}
+                        {collapsed ? null : 'Выход'}
                     </Button>
                 </div>
                 <ToggleButton handler={handleToggle} mobile={mobile} collapsed={collapsed} />
