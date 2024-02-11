@@ -16,7 +16,7 @@ interface SidebarProps {
     setMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
-    const [collapsed, setCollapsed] = useState(true);
+    const [collapsed, setCollapsed] = useState(false);
     const handleToggle = useCallback(() => {
         if (mobile) {
             document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
@@ -42,9 +42,13 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
             <div className={styles.sidebarContent}>
                 <div>
                     <div
-                        className={clx({ [styles.shortLogo]: collapsed }, styles.logo, {
-                            [styles.mobileLogo]: mobile,
-                        })}
+                        className={clx(
+                            {
+                                [styles.mobileLogo]: mobile,
+                            },
+                            { [styles.shortLogo]: collapsed },
+                            styles.logo,
+                        )}
                     >
                         {collapsed ? <ShortLogo /> : <FullLogo />}
                     </div>
