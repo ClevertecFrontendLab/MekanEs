@@ -67,9 +67,10 @@
 .mobileLogo {
     width: 30px;
     padding: 8px 17px;
-    svg {
-        width: 72px;
-    }
+}
+
+.mobileLogo > svg {
+    width: 72px;
 }
 .link {
     cursor: pointer;
