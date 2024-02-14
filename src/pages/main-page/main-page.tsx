@@ -3,7 +3,7 @@ import styles from './main-page.module.css';
 import { Typography } from 'antd';
 
 import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
-import { ActionCard, TextContainer } from '@components/index';
+import { ActionCard, TextContainer } from '@shared/components';
 
 export const MainPage: React.FC = () => {
     return (

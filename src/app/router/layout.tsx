@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import styles from './Layout.module.css';
-import { AppFooter, AppHeader, Sidebar } from '@components/index';
+import { AppFooter, AppHeader, Sidebar } from '@shared/components';
 
 const { Header, Content } = Layout;
 export const AppLayout: FC = () => {
