@@ -1,9 +1,13 @@
+.bg {
+    background: url('../assets/images/main_page.png') no-repeat;
+}
 .Layout {
     display: flex;
-    background: url('../assets/images/main_page_light.png') no-repeat;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
     background-size: cover;
     min-height: 1020px;
 }
+
 @media (max-width: 1024px) {
     .Layout {
         min-height: 1194px;

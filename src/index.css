@@ -116,7 +116,8 @@ h2.ant-typography,
 h3.ant-typography,
 h4.ant-typography,
 h5.ant-typography,
-h6.ant-typography {
+h6.ant-typography,
+.ant-typography {
     line-height: 1.31;
 }
 
