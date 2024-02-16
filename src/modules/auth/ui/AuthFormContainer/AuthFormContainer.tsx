@@ -24,7 +24,7 @@ export const AuthFormContainer: FC = () => {
                                 {
                                     label: <Link to='/auth'>Вход</Link>,
                                     key: 'auth',
-                                    active: location.pathname === '/auth',
+                                    active: location.pathname === '/auth' || true,
                                     children: <AuthForm />,
                                 },
                                 {

@@ -6,7 +6,7 @@ import { HistoryRouter } from 'redux-first-history/rr6';
 import 'normalize.css';
 import 'antd/dist/antd.css';
 import './index.css';
-import { routes } from './app/router/router';
+import { routes } from './app/router/routes';
 import { store, history } from '@app/store';
 
 const domNode = document.getElementById('root') as HTMLDivElement;

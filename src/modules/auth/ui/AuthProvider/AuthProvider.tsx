@@ -1,18 +1,20 @@
+import { LS_AuthKey } from '@shared/constants/constants';
 import { useAppDispatch } from '@shared/hooks/typed-react-redux-hooks';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import { push } from 'redux-first-history';
 interface AuthProviderProps {
-    children: ReactNode;
     redirect: string;
+    passIf: boolean;
 }
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children, redirect }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ redirect, passIf }) => {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        const isAuth = localStorage.getItem('auth');
-        if (!isAuth) {
+        const isAuth = localStorage.getItem(LS_AuthKey);
+        if (Boolean(isAuth) === passIf) {
             dispatch(push(redirect));
         }
-    }, [dispatch, redirect]);
-    return <>{children}</>;
+    }, [dispatch, redirect, passIf]);
+    return <Outlet />;
 };

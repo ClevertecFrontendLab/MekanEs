@@ -35,7 +35,7 @@ export const AuthForm: FC = () => {
                     },
                 ]}
             >
-                <Input prefix={<div>e-mail:</div>} />
+                <Input autoComplete='username' prefix={<div>e-mail:</div>} />
             </Form.Item>
             <Form.Item
                 name='password'
@@ -46,7 +46,11 @@ export const AuthForm: FC = () => {
                     },
                 ]}
             >
-                <Input.Password type='password' placeholder='Пароль' />
+                <Input.Password
+                    autoComplete='current-password'
+                    type='password'
+                    placeholder='Пароль'
+                />
             </Form.Item>
             <Form.Item>
                 <Form.Item name='remember' valuePropName='checked' noStyle>

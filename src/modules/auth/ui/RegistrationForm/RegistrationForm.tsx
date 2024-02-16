@@ -31,7 +31,7 @@ export const RegistrationForm: FC = () => {
                     },
                 ]}
             >
-                <Input prefix={<div>e-mail:</div>} />
+                <Input autoComplete='username' prefix={<div>e-mail:</div>} />
             </Form.Item>
             <Form.Item
                 name='password'
@@ -42,7 +42,7 @@ export const RegistrationForm: FC = () => {
                     },
                 ]}
             >
-                <Input.Password type='password' placeholder='Пароль' />
+                <Input.Password autoComplete='new-password' type='password' placeholder='Пароль' />
             </Form.Item>
             <Form.Item
                 name='confirm'
@@ -66,7 +66,7 @@ export const RegistrationForm: FC = () => {
                     }),
                 ]}
             >
-                <Input.Password />
+                <Input.Password autoComplete='new-password' />
             </Form.Item>
         </Form>
     );
