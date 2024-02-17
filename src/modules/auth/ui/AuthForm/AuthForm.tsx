@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './AuthForm.module.css';
 import clx from 'classnames';
 import { Button, Checkbox, Form, Input } from 'antd';
@@ -19,6 +19,7 @@ export interface FormValues extends LoginProps {
 }
 export const AuthForm: FC = () => {
     const [login, { isLoading }] = useLoginMutation();
+    const [disabledSave, setDisabledSave] = useState(true);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const onFinish = async (values: FormValues) => {
@@ -41,6 +42,15 @@ export const AuthForm: FC = () => {
                 password: '',
                 remember: true,
             }}
+            onFieldsChange={(_, allFields) => {
+                const isValid = allFields.every(({ errors }) => !errors || errors.length === 0);
+                const touched = allFields.slice(0, 1).every(({ touched }) => touched);
+                if (isValid && touched) {
+                    setDisabledSave(false);
+                } else {
+                    setDisabledSave(true);
+                }
+            }}
             onFinish={onFinish}
             layout='vertical'
             requiredMark='optional'
@@ -51,11 +61,9 @@ export const AuthForm: FC = () => {
                 name='email'
                 rules={[
                     {
-                        type: 'email',
-                    },
-                    {
                         required: true,
-                        message: 'Пожалуйста введите email',
+                        type: 'email',
+                        message: <></>,
                     },
                 ]}
             >
@@ -66,9 +74,6 @@ export const AuthForm: FC = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your Password!',
-                    },
-                    {
                         min: 8,
                         validator: validatePassword,
                     },
@@ -87,7 +92,7 @@ export const AuthForm: FC = () => {
                 <a href=''>Забыли пароль?</a>
             </Form.Item>
             <Form.Item style={{ marginBottom: '0px' }}>
-                <Button block={true} type='primary' htmlType='submit'>
+                <Button disabled={disabledSave} block={true} type='primary' htmlType='submit'>
                     Log in
                 </Button>
                 <Button icon={<GooglePlusOutlined />} type='default'>

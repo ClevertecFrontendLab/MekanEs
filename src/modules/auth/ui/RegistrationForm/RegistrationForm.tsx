@@ -1,16 +1,19 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './RegistrationForm.module.css';
 import clx from 'classnames';
 import { Button, Form, Input } from 'antd';
 import { useRegisterMutation } from '@modules/auth/authApi/authApi';
 import { useNavigate } from 'react-router-dom';
 import { LoginProps } from '@shared/types/auth';
+import { validatePassword } from '@shared/utils';
 
 // interface RegistrationFormProps {
 //     className?: string;
 // }
 
 export const RegistrationForm: FC = () => {
+    const [disabledSave, setDisabledSave] = useState(true);
+
     const [register, { isLoading }] = useRegisterMutation();
     const navigate = useNavigate();
     const onFinish = async (values: LoginProps) => {
@@ -31,17 +34,24 @@ export const RegistrationForm: FC = () => {
             layout='vertical'
             requiredMark='optional'
             className={clx(styles.RegistrationForm)}
+            onFieldsChange={(_, allFields) => {
+                const isValid = allFields.every(({ errors }) => !errors || errors.length === 0);
+                const touched = allFields.slice(0, 1).every(({ touched }) => touched);
+                if (isValid && touched) {
+                    setDisabledSave(false);
+                } else {
+                    setDisabledSave(true);
+                }
+            }}
         >
             {isLoading && <div>Loading...</div>}
             <Form.Item
                 name='email'
                 rules={[
                     {
-                        type: 'email',
-                    },
-                    {
                         required: true,
-                        message: 'Пожалуйста введите email',
+                        type: 'email',
+                        message: <></>,
                     },
                 ]}
             >
@@ -52,7 +62,8 @@ export const RegistrationForm: FC = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your Password!',
+                        min: 8,
+                        validator: validatePassword,
                     },
                 ]}
             >
@@ -62,20 +73,17 @@ export const RegistrationForm: FC = () => {
                 name='confirm'
                 label='Confirm Password'
                 dependencies={['password']}
-                hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your password!',
+                        message: <></>,
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(
-                                new Error('The new password that you entered do not match!'),
-                            );
+                            return Promise.reject('Пароли не совпадают');
                         },
                     }),
                 ]}
@@ -83,7 +91,7 @@ export const RegistrationForm: FC = () => {
                 <Input.Password autoComplete='new-password' />
             </Form.Item>
             <Form.Item style={{ marginBottom: '0px' }}>
-                <Button block={true} type='primary' htmlType='submit'>
+                <Button disabled={disabledSave} block={true} type='primary' htmlType='submit'>
                     Register
                 </Button>
             </Form.Item>
