@@ -3,19 +3,42 @@ import styles from './AuthForm.module.css';
 import clx from 'classnames';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { useLoginMutation } from '@modules/auth/authApi/authApi';
+import { LoginProps } from '@shared/types/auth';
+import { authActions } from '@modules/auth/model/authSlice';
+import { useAppDispatch } from '@shared/hooks';
+import { useNavigate } from 'react-router-dom';
+import { LS_AuthKey } from '@shared/constants/constants';
+import { validatePassword } from '@shared/utils';
 
 // interface AuthFormProps {
 //     className?: string;
 // }
-
+export interface FormValues extends LoginProps {
+    remember: boolean;
+}
 export const AuthForm: FC = () => {
-    const onFinish = (values: unknown) => {
-        console.log('Received values of form: ', values);
+    const [login, { isLoading }] = useLoginMutation();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const onFinish = async (values: FormValues) => {
+        try {
+            const { accessToken } = await login(values).unwrap();
+            dispatch(authActions.setAuthToken(accessToken));
+            if (values.remember) {
+                localStorage.setItem(LS_AuthKey, accessToken);
+            }
+            navigate('/main');
+        } catch (e) {
+            console.log(e);
+        }
     };
     return (
         <Form
             name='normal_login'
             initialValues={{
+                email: '',
+                password: '',
                 remember: true,
             }}
             onFinish={onFinish}
@@ -23,6 +46,7 @@ export const AuthForm: FC = () => {
             requiredMark='optional'
             className={clx(styles.AuthForm)}
         >
+            {isLoading && <div>Loading...</div>}
             <Form.Item
                 name='email'
                 rules={[
@@ -43,6 +67,10 @@ export const AuthForm: FC = () => {
                     {
                         required: true,
                         message: 'Please input your Password!',
+                    },
+                    {
+                        min: 8,
+                        validator: validatePassword,
                     },
                 ]}
             >

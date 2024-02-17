@@ -1,20 +1,25 @@
-import { LS_AuthKey } from '@shared/constants/constants';
-import { useAppDispatch } from '@shared/hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@shared/hooks/typed-react-redux-hooks';
 import { FC, useEffect } from 'react';
 import { push } from 'redux-first-history';
 import { AuthLayout } from '../AuthLayout/AuthLayout';
+import { getAuth } from '@modules/auth';
+import { Outlet } from 'react-router-dom';
 interface AuthProviderProps {
     redirect: string;
     passIf: boolean;
+    withLayout?: boolean;
 }
 
-export const AuthProvider: FC<AuthProviderProps> = ({ redirect, passIf }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ redirect, passIf, withLayout }) => {
     const dispatch = useAppDispatch();
+    const isAuth = useAppSelector(getAuth);
     useEffect(() => {
-        const isAuth = localStorage.getItem(LS_AuthKey);
         if (Boolean(isAuth) === passIf) {
             dispatch(push(redirect));
         }
-    }, [dispatch, redirect, passIf]);
+    }, [dispatch, redirect, passIf, isAuth]);
+    if (!withLayout) {
+        return <Outlet />;
+    }
     return <AuthLayout />;
 };

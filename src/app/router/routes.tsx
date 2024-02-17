@@ -12,7 +12,7 @@ export const routes = (
 
             <Route path='/second' element={<>second</>} />
         </Route>
-        <Route element={<AuthProvider passIf={true} redirect='/main' />}>
+        <Route element={<AuthProvider withLayout passIf={true} redirect='/main' />}>
             <Route path='/auth/registration' element={<Auth />} />
             <Route path='/auth' element={<Auth />} />
         </Route>

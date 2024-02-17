@@ -9,6 +9,9 @@ import { Button, Layout } from 'antd';
 import clx from 'classnames';
 import AppMenu from './Menu/Menu';
 import ToggleButton from './ToggleButton/ToggleButton';
+import { LS_AuthKey } from '@shared/constants/constants';
+import { useAppDispatch } from '@shared/hooks';
+import { authActions } from '@modules/auth/model/authSlice';
 
 const { Sider } = Layout;
 interface SidebarProps {
@@ -17,6 +20,7 @@ interface SidebarProps {
 }
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
     const [collapsed, setCollapsed] = useState(false);
+    const dispatch = useAppDispatch();
     const handleToggle = useCallback(() => {
         if (mobile) {
             document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
@@ -59,6 +63,10 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
                     <Divider style={{ margin: '0' }} />
 
                     <Button
+                        onClick={() => {
+                            localStorage.removeItem(LS_AuthKey);
+                            dispatch(authActions.setAuthToken(null));
+                        }}
                         type='text'
                         icon={mobile ? null : <ExitIcon />}
                         className={styles.exitBtn}

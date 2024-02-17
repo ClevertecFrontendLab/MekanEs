@@ -1,1 +1,1 @@
-export { store, history } from './configure-store';
+export { store, history, type RootState, type AppDispatch } from './configure-store';

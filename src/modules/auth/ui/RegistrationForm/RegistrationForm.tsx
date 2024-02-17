@@ -1,16 +1,29 @@
 import { FC } from 'react';
 import styles from './RegistrationForm.module.css';
 import clx from 'classnames';
-import { Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { useRegisterMutation } from '@modules/auth/authApi/authApi';
+import { useNavigate } from 'react-router-dom';
+import { LoginProps } from '@shared/types/auth';
 
 // interface RegistrationFormProps {
 //     className?: string;
 // }
 
 export const RegistrationForm: FC = () => {
-    const onFinish = (values: unknown) => {
-        console.log('Received values of form: ', values);
+    const [register, { isLoading }] = useRegisterMutation();
+    const navigate = useNavigate();
+    const onFinish = async (values: LoginProps) => {
+        console.log(values);
+        try {
+            await register(values).unwrap();
+
+            navigate('/auth');
+        } catch (e) {
+            console.log(e);
+        }
     };
+
     return (
         <Form
             name='registration'
@@ -19,6 +32,7 @@ export const RegistrationForm: FC = () => {
             requiredMark='optional'
             className={clx(styles.RegistrationForm)}
         >
+            {isLoading && <div>Loading...</div>}
             <Form.Item
                 name='email'
                 rules={[
@@ -67,6 +81,11 @@ export const RegistrationForm: FC = () => {
                 ]}
             >
                 <Input.Password autoComplete='new-password' />
+            </Form.Item>
+            <Form.Item style={{ marginBottom: '0px' }}>
+                <Button block={true} type='primary' htmlType='submit'>
+                    Register
+                </Button>
             </Form.Item>
         </Form>
     );

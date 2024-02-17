@@ -1,5 +1,5 @@
 .bg {
-    background: url('../assets/images/main_page.png') no-repeat;
+    background: url('../../assets/images/main_page.png') no-repeat;
 }
 .Layout {
     display: flex;
