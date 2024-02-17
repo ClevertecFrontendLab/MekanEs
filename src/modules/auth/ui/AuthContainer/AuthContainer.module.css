@@ -1,0 +1,4 @@
+.AuthContainer {
+    display: flex;
+    background-color: var(--neutral-gray-1);
+}

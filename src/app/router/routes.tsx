@@ -10,13 +10,11 @@ export const routes = (
                 <Route path='/main' element={<MainPage />} />
             </Route>
 
-            <Route path='/auth' element={<AuthProvider passIf={true} redirect='/main' />}>
-                <Route path='/auth/registration' element={<Auth />} />
-
-                <Route path='/auth' element={<Auth />} />
-            </Route>
-
             <Route path='/second' element={<>second</>} />
+        </Route>
+        <Route element={<AuthProvider passIf={true} redirect='/main' />}>
+            <Route path='/auth/registration' element={<Auth />} />
+            <Route path='/auth' element={<Auth />} />
         </Route>
     </Routes>
 );
