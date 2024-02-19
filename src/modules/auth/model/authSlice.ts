@@ -3,7 +3,7 @@ import { LS_AuthKey } from '@shared/constants/constants';
 import { AuthSlice } from '../types';
 
 const initialState: AuthSlice = {
-    token: localStorage.getItem(LS_AuthKey),
+    token: localStorage.getItem(LS_AuthKey) || sessionStorage.getItem(LS_AuthKey),
 };
 export const authSlice = createSlice({
     name: 'authSlice',

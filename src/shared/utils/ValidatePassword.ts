@@ -12,7 +12,7 @@ export const validatePassword = (_: RuleObject, value: string) => {
         }
     }
     if (hasUpper && hasDigit && value.length > 7 && value.match(new RegExp('^[A-Za-z0-9]+$'))) {
-        return Promise.resolve();
+        return Promise.resolve('Пароль не менее 8 символов, с заглавной буквой и цифрой');
     }
     return Promise.reject('Пароль не менее 8 символов, с заглавной буквой и цифрой');
 };

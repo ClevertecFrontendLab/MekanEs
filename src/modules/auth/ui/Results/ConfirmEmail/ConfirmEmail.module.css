@@ -1,0 +1,7 @@
+.ConfirmEmail {
+    display: flex;
+}
+
+.bordered {
+    border-color: var(--character-light-error);
+}

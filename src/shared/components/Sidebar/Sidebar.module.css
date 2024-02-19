@@ -5,8 +5,9 @@
 }
 @media (max-width: 575px) {
     .Sidebar {
-        position: absolute;
+        position: fixed;
         height: 100%;
+        z-index: 1;
     }
 }
 .sidebarContent {

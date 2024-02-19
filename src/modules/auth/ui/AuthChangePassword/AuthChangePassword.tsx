@@ -1,77 +1,82 @@
 import { FC, useEffect, useState } from 'react';
-import styles from './RegistrationForm.module.css';
+import styles from './AuthChangePassword.module.css';
 import clx from 'classnames';
 import { Button, Form, Input } from 'antd';
-import { useRegisterMutation } from '@modules/auth/authApi/authApi';
-import { useNavigate } from 'react-router-dom';
-import { LoginProps } from '@shared/types/auth';
-import { validatePassword } from '@shared/utils';
-import { CustomResponseError, Paths } from '@shared/types/common';
+
+import { authActions } from '../../model/authSlice';
+import { useAppDispatch } from '@shared/hooks';
+import { useLocation, useNavigate } from 'react-router-dom';
+// import { validatePassword } from '@shared/utils';
+import { push } from 'redux-first-history';
+import { Paths } from '@shared/types/common';
+import { CustomResponseError } from '@shared/types/common';
+import { useChangePasswordMutation } from '../../authApi/authApi';
 import { LoaderModal } from '@shared/components';
 
-// interface RegistrationFormProps {
-//     className?: string;
-// }
-
-export const RegistrationForm: FC = () => {
+export interface ConfirmPassword {
+    password: string;
+}
+export const AuthChangePassword: FC = () => {
+    const [changePassword, { isLoading, error: emailCheckError }] = useChangePasswordMutation();
+    const { state } = useLocation();
+    //Clear
+    console.log(state);
+    //Clear
     const [disabledSave, setDisabledSave] = useState(true);
-
-    const [register, { isLoading, error }] = useRegisterMutation();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const onFinish = async (values: LoginProps) => {
+    const onFinish = async (values: ConfirmPassword) => {
         try {
-            await register(values).unwrap();
+            const { accessToken } = await changePassword({
+                password: values.password,
+                confirmPassword: values.password,
+            }).unwrap();
+            dispatch(authActions.setAuthToken(accessToken));
 
-            navigate(Paths.RESULT_SUCCESS);
+            navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD);
         } catch (e) {
-            const err = e;
-            //Clear
-            console.log(err);
-            //Clear
+            dispatch(push(Paths.RESULT_ERROR_CHANGE_PASSWORD));
         }
     };
     useEffect(() => {
-        if (error) {
-            const err = error as CustomResponseError;
-            if (err?.status === 409) {
-                navigate(Paths.RESULT_ERROR_US_EXIST);
+        if (emailCheckError) {
+            const error = emailCheckError as CustomResponseError;
+            if (
+                error.data &&
+                error?.data?.statusCode === 404 &&
+                error?.data?.message === 'Email не найден'
+            ) {
+                navigate(Paths.RESULT_ERROR_NO_EMAIL);
             } else {
-                navigate(Paths.RESULT_ERROR);
+                navigate(Paths.RESULT_ERROR_CHECK_EMAIL);
             }
         }
-    }, [error, navigate]);
+    }, [navigate, emailCheckError]);
 
     return (
         <Form
-            name='registration'
-            onFinish={onFinish}
-            layout='vertical'
-            requiredMark='optional'
-            className={clx(styles.RegistrationForm)}
+            autoComplete={'off'}
+            autoFocus={true}
+            name='normal_login'
+            initialValues={{
+                password: '',
+            }}
             onFieldsChange={(_, allFields) => {
                 const isValid = allFields.every(({ errors }) => !errors || errors.length === 0);
                 const touched = allFields.slice(0, 1).every(({ touched }) => touched);
+
                 if (isValid && touched) {
                     setDisabledSave(false);
                 } else {
                     setDisabledSave(true);
                 }
             }}
+            onFinish={onFinish}
+            layout='vertical'
+            requiredMark='optional'
+            className={clx(styles.AuthChangePassword)}
         >
             {isLoading && <LoaderModal />}
-
-            <Form.Item
-                name='email'
-                rules={[
-                    {
-                        required: true,
-                        type: 'email',
-                        message: <></>,
-                    },
-                ]}
-            >
-                <Input autoComplete='username' prefix={<div>e-mail:</div>} />
-            </Form.Item>
             <Form.Item
                 name='password'
                 help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
@@ -79,7 +84,8 @@ export const RegistrationForm: FC = () => {
                     {
                         required: true,
                         min: 8,
-                        validator: validatePassword,
+                        // validator: validatePassword,
+                        pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
                     },
                     { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
                 ]}
@@ -106,9 +112,10 @@ export const RegistrationForm: FC = () => {
             >
                 <Input.Password autoComplete='new-password' />
             </Form.Item>
+
             <Form.Item style={{ marginBottom: '0px' }}>
                 <Button disabled={disabledSave} block={true} type='primary' htmlType='submit'>
-                    Register
+                    Сохранить
                 </Button>
             </Form.Item>
         </Form>

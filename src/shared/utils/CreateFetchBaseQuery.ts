@@ -13,4 +13,5 @@ export const CreateFBQ = (additinal: string) =>
             }
             return headers;
         },
+        credentials: 'include',
     });

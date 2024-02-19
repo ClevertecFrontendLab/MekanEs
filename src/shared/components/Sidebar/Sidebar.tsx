@@ -22,11 +22,8 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useAppDispatch();
     const handleToggle = useCallback(() => {
-        if (mobile) {
-            document.body.style['overflowY'] = collapsed ? 'hidden' : 'scroll';
-        }
         setCollapsed((prev) => !prev);
-    }, [collapsed, mobile]);
+    }, []);
 
     const handleBreak = (broken: boolean) => {
         setMobile(broken);

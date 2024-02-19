@@ -1,0 +1,4 @@
+.ResultForm {
+    display: flex;
+    flex-direction: column;
+}
