@@ -9,5 +9,5 @@ export const Loader = () => {
 
     const { View } = useLottie(options);
 
-    return <>{View}</>;
+    return <div data-test-id='loader'>{View}</div>;
 };

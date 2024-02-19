@@ -17,11 +17,12 @@ export const AuthLayout: FC = () => {
         }
     }, [location.pathname, dispatch]);
     return (
-        <div className={clx(styles.overlay)}>
-            <div className={styles.bg} style={{ backgroundImage: `url(${bgImage})` }}></div>
-            <Card className={clx(styles.content)}>
-                <Outlet />
-            </Card>
+        <div style={{ backgroundImage: `url(${bgImage})` }}>
+            <div className={clx(styles.overlay)}>
+                <Card className={clx(styles.content)}>
+                    <Outlet />
+                </Card>
+            </div>
         </div>
     );
 };

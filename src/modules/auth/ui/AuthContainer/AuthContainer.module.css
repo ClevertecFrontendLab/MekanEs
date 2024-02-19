@@ -1,4 +1,23 @@
 .AuthContainer {
     display: flex;
-    background-color: var(--neutral-gray-1);
+    flex-direction: column;
+    gap: 48px;
+    max-width: 368px;
+    align-items: center;
+}
+
+@media (max-width: 470px) {
+    .AuthContainer {
+        gap: 32px;
+        max-width: 298px;
+    }
+}
+
+.logo {
+    width: 309px;
+}
+@media (max-width: 470px) {
+    .logo {
+        width: 203px;
+    }
 }

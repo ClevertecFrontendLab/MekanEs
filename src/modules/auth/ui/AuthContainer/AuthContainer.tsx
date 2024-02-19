@@ -12,28 +12,25 @@ export const AuthContainer: FC = () => {
 
     return (
         <section className={clx(styles.AuthContainer)}>
-            <div>
-                <Logo />
-                <div>
-                    <Tabs
-                        activeKey={location.pathname.split('/').slice(-1)[0]}
-                        items={[
-                            {
-                                label: <Link to='/auth'>Вход</Link>,
-                                key: 'auth',
-                                active: location.pathname === '/auth' || true,
-                                children: <AuthForm />,
-                            },
-                            {
-                                label: <Link to='/auth/registration'>Регистрация</Link>,
-                                key: 'registration',
-                                active: location.pathname !== '/auth',
-                                children: <RegistrationForm />,
-                            },
-                        ]}
-                    />
-                </div>
-            </div>
+            <Logo width={'309px'} height={'76px'} />
+
+            <Tabs
+                activeKey={location.pathname.split('/').slice(-1)[0]}
+                items={[
+                    {
+                        label: <Link to='/auth'>Вход</Link>,
+                        key: 'auth',
+                        active: location.pathname === '/auth' || true,
+                        children: <AuthForm />,
+                    },
+                    {
+                        label: <Link to='/auth/registration'>Регистрация</Link>,
+                        key: 'registration',
+                        active: location.pathname !== '/auth',
+                        children: <RegistrationForm />,
+                    },
+                ]}
+            />
         </section>
     );
 };

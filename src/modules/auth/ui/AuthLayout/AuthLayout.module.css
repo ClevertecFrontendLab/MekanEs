@@ -7,11 +7,11 @@
     justify-content: center;
     position: relative;
     min-height: 100vh;
+    backdrop-filter: blur(12px);
+    background: rgba(121, 156, 212, 0.5);
 }
 
 .bg {
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,6 +21,9 @@
 }
 
 .content {
-    padding: 0;
+    padding: 64px 85.5px;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

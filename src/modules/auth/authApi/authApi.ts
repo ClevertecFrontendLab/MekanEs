@@ -20,7 +20,7 @@ export const authApi = createApi({
                 body: credentials,
             }),
         }),
-        register: builder.mutation<LoginResponse, LoginProps>({
+        register: builder.mutation<object, LoginProps>({
             query: (credentials) => ({
                 url: 'registration',
                 method: 'POST',
@@ -42,10 +42,7 @@ export const authApi = createApi({
                 body: credentials,
             }),
         }),
-        changePassword: builder.mutation<
-            LoginResponse,
-            { password: string; confirmPassword: string }
-        >({
+        changePassword: builder.mutation<object, { password: string; confirmPassword: string }>({
             query: (credentials) => ({
                 url: 'change-password',
                 method: 'POST',

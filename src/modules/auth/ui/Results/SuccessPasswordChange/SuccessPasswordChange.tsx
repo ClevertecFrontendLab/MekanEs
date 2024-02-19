@@ -21,10 +21,8 @@ export const SuccesPasswordChange: FC<SuccesPasswordChangeProps> = () => {
             title='Пароль успешно изменен'
             subTitle='Теперь можно войти в аккаунт, используя свой логин и новый пароль.'
             buttonText='Вход'
-            onClick={() => {
-                console.log('click');
-            }}
             redirect={Paths.AUTH}
+            id='change-entry-button'
         />
     );
 };

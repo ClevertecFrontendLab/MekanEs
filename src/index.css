@@ -133,3 +133,7 @@ h6.ant-typography,
         margin: 0;
     }
 }
+
+.ant-card-body {
+    padding: 0;
+}

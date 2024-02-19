@@ -1,71 +1,68 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import styles from './AuthChangePassword.module.css';
 import clx from 'classnames';
 import { Button, Form, Input } from 'antd';
 
 import { authActions } from '../../model/authSlice';
-import { useAppDispatch } from '@shared/hooks';
-import { useLocation, useNavigate } from 'react-router-dom';
-// import { validatePassword } from '@shared/utils';
-import { push } from 'redux-first-history';
+import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@shared/types/common';
-import { CustomResponseError } from '@shared/types/common';
 import { useChangePasswordMutation } from '../../authApi/authApi';
 import { LoaderModal } from '@shared/components';
+import { defNavOption } from '@shared/constants/constants';
+import { getChangeValues } from '@modules/auth/model/authSelectors';
 
 export interface ConfirmPassword {
     password: string;
 }
 export const AuthChangePassword: FC = () => {
-    const [changePassword, { isLoading, error: emailCheckError }] = useChangePasswordMutation();
-    const { state } = useLocation();
-    //Clear
-    console.log(state);
-    //Clear
-    const [disabledSave, setDisabledSave] = useState(true);
+    const [changePassword, { isLoading, error: changePasswordError }] = useChangePasswordMutation();
+    const location = useLocation();
+    const changeValues = useAppSelector(getChangeValues);
+    const [disabledSave, setDisabledSave] = useState(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const onFinish = async (values: ConfirmPassword) => {
-        try {
-            const { accessToken } = await changePassword({
-                password: values.password,
-                confirmPassword: values.password,
-            }).unwrap();
-            dispatch(authActions.setAuthToken(accessToken));
+    const onFinish = useCallback(
+        async (values: ConfirmPassword) => {
+            try {
+                dispatch(authActions.setChangeValues(values));
+                await changePassword({
+                    password: values.password,
+                    confirmPassword: values.password,
+                });
 
-            navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD);
-        } catch (e) {
-            dispatch(push(Paths.RESULT_ERROR_CHANGE_PASSWORD));
-        }
-    };
-    useEffect(() => {
-        if (emailCheckError) {
-            const error = emailCheckError as CustomResponseError;
-            if (
-                error.data &&
-                error?.data?.statusCode === 404 &&
-                error?.data?.message === 'Email не найден'
-            ) {
-                navigate(Paths.RESULT_ERROR_NO_EMAIL);
-            } else {
-                navigate(Paths.RESULT_ERROR_CHECK_EMAIL);
+                navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
+            } catch (e) {
+                console.log(e);
             }
+        },
+        [changePassword, dispatch, navigate],
+    );
+    useEffect(() => {
+        if (changePasswordError) {
+            navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
         }
-    }, [navigate, emailCheckError]);
+    }, [navigate, changePasswordError]);
 
+    useEffect(() => {
+        if (location?.state?.action === 'changeAgain') {
+            if (changeValues) onFinish(changeValues);
+        }
+    }, [changeValues, location, onFinish]);
+
+    if (location?.state?.from !== defNavOption.state.from) {
+        return <Navigate to={Paths.AUTH} />;
+    }
     return (
         <Form
             autoComplete={'off'}
             autoFocus={true}
             name='normal_login'
-            initialValues={{
-                password: '',
-            }}
+            initialValues={undefined}
             onFieldsChange={(_, allFields) => {
                 const isValid = allFields.every(({ errors }) => !errors || errors.length === 0);
-                const touched = allFields.slice(0, 1).every(({ touched }) => touched);
 
-                if (isValid && touched) {
+                if (isValid) {
                     setDisabledSave(false);
                 } else {
                     setDisabledSave(true);
@@ -83,14 +80,17 @@ export const AuthChangePassword: FC = () => {
                 rules={[
                     {
                         required: true,
-                        min: 8,
-                        // validator: validatePassword,
                         pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
                     },
                     { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
                 ]}
             >
-                <Input.Password autoComplete='new-password' type='password' placeholder='Пароль' />
+                <Input.Password
+                    data-test-id='change-password'
+                    autoComplete='new-password'
+                    type='password'
+                    placeholder='Пароль'
+                />
             </Form.Item>
             <Form.Item
                 name='confirm'
@@ -110,11 +110,20 @@ export const AuthChangePassword: FC = () => {
                     }),
                 ]}
             >
-                <Input.Password autoComplete='new-password' />
+                <Input.Password
+                    data-test-id='change-confirm-password'
+                    autoComplete='new-password'
+                />
             </Form.Item>
 
             <Form.Item style={{ marginBottom: '0px' }}>
-                <Button disabled={disabledSave} block={true} type='primary' htmlType='submit'>
+                <Button
+                    data-test-id='change-submit-button'
+                    disabled={disabledSave}
+                    block={true}
+                    type='primary'
+                    htmlType='submit'
+                >
                     Сохранить
                 </Button>
             </Form.Item>
