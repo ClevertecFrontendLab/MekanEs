@@ -32,13 +32,22 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
         console.log('auto redirect', location);
         return <Navigate to={Paths.AUTH} />;
     }
+
     return (
         <div className={clx(styles.ResultForm)}>
             {icon}
-            <Typography.Title>{title}</Typography.Title>
-            <Typography.Text>{subTitle}</Typography.Text>
-
-            <Button data-test-id={id} onClick={handleClick} type='primary'>
+            <div className={styles.description}>
+                <Typography.Title level={3} style={{ marginBottom: '0' }}>
+                    {title}
+                </Typography.Title>
+                <Typography.Text>{subTitle}</Typography.Text>
+            </div>
+            <Button
+                className={styles.resultBtn}
+                data-test-id={id}
+                onClick={handleClick}
+                type='primary'
+            >
                 {buttonText}
             </Button>
         </div>

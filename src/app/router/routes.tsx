@@ -15,6 +15,7 @@ import {
 } from '@modules/auth';
 import { AppLayout } from '@shared/components';
 import { Paths } from '@shared/types/common';
+import { ResultProvider } from '@modules/auth/ui/Results/ResultProvider/ResultProvider';
 
 export const routes = (
     <Routes>
@@ -26,16 +27,26 @@ export const routes = (
         <Route element={<AuthProvider withLayout passIf={true} redirect={Paths.MAIN} />}>
             <Route path={Paths.REGISTRATION} element={<Auth />} />
             <Route path={Paths.AUTH} element={<Auth />} />
-            <Route path={Paths.AUTH_CHANGE_PASSWORD} element={<AuthChangePassword />} />
-            <Route path={Paths.RESULT_ERROR_LOGIN} element={<ErrorLogin />} />
-            <Route path={Paths.RESULT_ERROR_US_EXIST} element={<RegistrationErrorUE />} />
-            <Route path={Paths.RESULT_ERROR} element={<RegistrationError />} />
-            <Route path={Paths.RESULT_SUCCESS} element={<RegistrationSucces />} />
-            <Route path={Paths.RESULT_SUCCESS_CHANGE_PASSWORD} element={<SuccesPasswordChange />} />
-            <Route path={Paths.CONFIRM_EMAIL} element={<ConfirmEmail />} />
-            <Route path={Paths.RESULT_ERROR_NO_EMAIL} element={<ErrorCheckEmailNoEmail />} />
-            <Route path={Paths.RESULT_ERROR_CHANGE_PASSWORD} element={<ErrorChangePassword />} />
-            <Route path={Paths.RESULT_ERROR_CHECK_EMAIL} element={<ErrorCheckEmail />} />
+        </Route>
+        <Route element={<AuthProvider passIf={true} redirect={Paths.MAIN} />}>
+            <Route element={<ResultProvider />}>
+                <Route path={Paths.AUTH_CHANGE_PASSWORD} element={<AuthChangePassword />} />
+                <Route path={Paths.RESULT_ERROR_LOGIN} element={<ErrorLogin />} />
+                <Route path={Paths.RESULT_ERROR_US_EXIST} element={<RegistrationErrorUE />} />
+                <Route path={Paths.RESULT_ERROR} element={<RegistrationError />} />
+                <Route path={Paths.RESULT_SUCCESS} element={<RegistrationSucces />} />
+                <Route
+                    path={Paths.RESULT_SUCCESS_CHANGE_PASSWORD}
+                    element={<SuccesPasswordChange />}
+                />
+                <Route path={Paths.CONFIRM_EMAIL} element={<ConfirmEmail />} />
+                <Route path={Paths.RESULT_ERROR_NO_EMAIL} element={<ErrorCheckEmailNoEmail />} />
+                <Route
+                    path={Paths.RESULT_ERROR_CHANGE_PASSWORD}
+                    element={<ErrorChangePassword />}
+                />
+                <Route path={Paths.RESULT_ERROR_CHECK_EMAIL} element={<ErrorCheckEmail />} />
+            </Route>
         </Route>
     </Routes>
 );

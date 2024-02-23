@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import styles from './AuthChangePassword.module.css';
 import clx from 'classnames';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Typography } from 'antd';
 
 import { authActions } from '../../model/authSlice';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
@@ -51,6 +51,7 @@ export const AuthChangePassword: FC = () => {
     }, [changeValues, location, onFinish]);
 
     if (location?.state?.from !== defNavOption.state.from) {
+        console.log('redirecting');
         return <Navigate to={Paths.AUTH} />;
     }
     return (
@@ -74,50 +75,57 @@ export const AuthChangePassword: FC = () => {
             className={clx(styles.AuthChangePassword)}
         >
             {isLoading && <LoaderModal />}
-            <Form.Item
-                name='password'
-                help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                rules={[
-                    {
-                        required: true,
-                        pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
-                    },
-                    { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
-                ]}
-            >
-                <Input.Password
-                    data-test-id='change-password'
-                    autoComplete='new-password'
-                    type='password'
-                    placeholder='Пароль'
-                />
-            </Form.Item>
-            <Form.Item
-                name='confirm'
-                dependencies={['password']}
-                rules={[
-                    {
-                        required: true,
-                        message: <></>,
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                            }
-                            return Promise.reject('Пароли не совпадают');
+            <Typography.Title level={3}>Восстановление аккаунта</Typography.Title>
+            <div className={styles.inputs}>
+                <Form.Item
+                    name='password'
+                    help={
+                        <div className={styles.help}>
+                            Пароль не менее 8 символов, с заглавной буквой и цифрой
+                        </div>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
                         },
-                    }),
-                ]}
-            >
-                <Input.Password
-                    data-test-id='change-confirm-password'
-                    autoComplete='new-password'
-                />
-            </Form.Item>
-
+                        { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
+                    ]}
+                >
+                    <Input.Password
+                        data-test-id='change-password'
+                        autoComplete='new-password'
+                        type='password'
+                        placeholder='Пароль'
+                    />
+                </Form.Item>
+                <Form.Item
+                    name='confirm'
+                    dependencies={['password']}
+                    rules={[
+                        {
+                            required: true,
+                            message: <></>,
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject('Пароли не совпадают');
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password
+                        data-test-id='change-confirm-password'
+                        autoComplete='new-password'
+                    />
+                </Form.Item>
+            </div>
             <Form.Item style={{ marginBottom: '0px' }}>
                 <Button
+                    className={styles.btn}
                     data-test-id='change-submit-button'
                     disabled={disabledSave}
                     block={true}

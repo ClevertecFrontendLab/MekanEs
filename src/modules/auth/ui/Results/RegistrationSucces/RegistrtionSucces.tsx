@@ -13,8 +13,9 @@ export const RegistrationSucces: FC<RegistrationSuccesProps> = () => {
             icon={
                 <CheckCircleFilled
                     style={{
-                        color: 'var(--character-light-success)',
+                        color: '#52C41A',
                         fontSize: '100px',
+                        width: '81px',
                     }}
                 />
             }

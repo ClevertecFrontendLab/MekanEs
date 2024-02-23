@@ -11,6 +11,7 @@ import { getRegValues } from '@modules/auth/model/authSelectors';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { authActions } from '@modules/auth/model/authSlice';
 import { defNavOption } from '@shared/constants/constants';
+import { GooglePlusOutlined } from '@ant-design/icons';
 
 // interface RegistrationFormProps {
 //     className?: string;
@@ -77,75 +78,93 @@ export const RegistrationForm: FC = () => {
             }}
         >
             {isLoading && <LoaderModal />}
-
-            <Form.Item
-                name='email'
-                rules={[
-                    {
-                        required: true,
-                        type: 'email',
-                        message: <></>,
-                    },
-                ]}
-            >
-                <Input
-                    data-test-id='registration-email'
-                    autoComplete='username'
-                    prefix={<div>e-mail:</div>}
-                />
-            </Form.Item>
-            <Form.Item
-                name='password'
-                help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                rules={[
-                    {
-                        required: true,
-                        min: 8,
-                        pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
-                    },
-                    { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
-                ]}
-            >
-                <Input.Password
-                    data-test-id='registration-password'
-                    autoComplete='new-password'
-                    type='password'
-                    placeholder='Пароль'
-                />
-            </Form.Item>
-            <Form.Item
-                name='confirm'
-                dependencies={['password']}
-                rules={[
-                    {
-                        required: true,
-                        message: <></>,
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                            }
-                            return Promise.reject('Пароли не совпадают');
+            <div className={clx(styles.inputs, styles.margin)}>
+                <Form.Item
+                    name='email'
+                    rules={[
+                        {
+                            required: true,
+                            type: 'email',
+                            message: <></>,
                         },
-                    }),
-                ]}
-            >
-                <Input.Password
-                    data-test-id='registration-confirm-password'
-                    autoComplete='new-password'
-                />
-            </Form.Item>
-            <Form.Item style={{ marginBottom: '0px' }}>
-                <Button
-                    data-test-id='registration-submit-button'
-                    block={true}
-                    type='primary'
-                    htmlType='submit'
+                    ]}
                 >
-                    Войти
+                    <Input
+                        data-test-id='registration-email'
+                        autoComplete='username'
+                        prefix={<div>e-mail:</div>}
+                    />
+                </Form.Item>
+                <Form.Item
+                    name='password'
+                    help={
+                        <div className={styles.help}>
+                            Пароль не менее 8 символов, с заглавной буквой и цифрой
+                        </div>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            min: 8,
+                            pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
+                        },
+                        { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
+                    ]}
+                >
+                    <Input.Password
+                        data-test-id='registration-password'
+                        autoComplete='new-password'
+                        type='password'
+                        placeholder='Пароль'
+                    />
+                </Form.Item>
+                <Form.Item
+                    name='confirm'
+                    dependencies={['password']}
+                    rules={[
+                        {
+                            required: true,
+                            message: <></>,
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject('Пароли не совпадают');
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password
+                        placeholder='Повторите пароль'
+                        data-test-id='registration-confirm-password'
+                        autoComplete='new-password'
+                    />
+                </Form.Item>
+            </div>
+            <div className={styles.inputs}>
+                <Form.Item style={{ marginBottom: '0px' }}>
+                    <Button
+                        style={{ height: '40px' }}
+                        data-test-id='registration-submit-button'
+                        block={true}
+                        type='primary'
+                        htmlType='submit'
+                    >
+                        Войти
+                    </Button>
+                </Form.Item>
+
+                <Button
+                    icon={<GooglePlusOutlined />}
+                    style={{ height: '40px' }}
+                    type='default'
+                    block
+                >
+                    Регистрация через Google
                 </Button>
-            </Form.Item>
+            </div>
         </Form>
     );
 };

@@ -14,8 +14,9 @@ export const ErrorChangePassword: FC<ErrorChangePasswordProps> = () => {
             icon={
                 <CloseCircleFilled
                     style={{
-                        color: 'var(--character-light-error)',
+                        color: '#FF4D4F',
                         fontSize: '100px',
+                        width: '81px',
                     }}
                 />
             }

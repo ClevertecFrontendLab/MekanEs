@@ -109,70 +109,85 @@ export const AuthForm: FC = () => {
                 }}
                 onFinish={onFinish}
                 layout='vertical'
-                requiredMark='optional'
                 className={clx(styles.Form)}
             >
-                <Form.Item
-                    name='email'
-                    rules={[
-                        {
-                            required: true,
-                            type: 'email',
-                            message: <></>,
-                        },
-                    ]}
-                >
-                    <Input
-                        data-test-id='login-email'
-                        autoComplete='username'
-                        autoFocus={true}
-                        prefix={<div>e-mail:</div>}
-                    />
-                </Form.Item>
-                <Form.Item
-                    name='password'
-                    help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                    rules={[
-                        {
-                            required: true,
-                            min: 8,
-                            pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        data-test-id='login-password'
-                        autoComplete='current-password'
-                        type='password'
-                        placeholder='Пароль'
-                    />
-                </Form.Item>
-                <Form.Item>
+                <div className={styles.inputs}>
+                    <Form.Item
+                        name='email'
+                        rules={[
+                            {
+                                required: true,
+                                type: 'email',
+                                message: <></>,
+                            },
+                        ]}
+                    >
+                        <Input
+                            data-test-id='login-email'
+                            autoComplete='username'
+                            autoFocus={true}
+                            prefix={<div>e-mail:</div>}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='password'
+                        help={''}
+                        rules={[
+                            {
+                                required: true,
+                                min: 8,
+                                pattern: new RegExp(
+                                    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$',
+                                ),
+                            },
+                        ]}
+                    >
+                        <Input.Password
+                            data-test-id='login-password'
+                            autoComplete='current-password'
+                            type='password'
+                            placeholder='Пароль'
+                            prefix={null}
+                        />
+                    </Form.Item>
+                </div>
+                <div className={styles['check-block']}>
                     <Form.Item name='remember' valuePropName='checked' noStyle>
                         <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                     </Form.Item>
+                    <Form.Item noStyle>
+                        <Button
+                            data-test-id='login-forgot-button'
+                            className={styles.checkMail}
+                            onClick={checkEmailHandle}
+                            disabled={!isValidEmail}
+                            type='link'
+                        >
+                            Забыли пароль?
+                        </Button>
+                    </Form.Item>
+                </div>
+                <div className={styles.inputs}>
+                    <Form.Item style={{ marginBottom: '0px' }}>
+                        <Button
+                            data-test-id='login-submit-button'
+                            block={true}
+                            type='primary'
+                            htmlType='submit'
+                            style={{ height: '40px' }}
+                        >
+                            Войти
+                        </Button>{' '}
+                    </Form.Item>
                     <Button
-                        data-test-id='login-forgot-button'
-                        onClick={checkEmailHandle}
-                        disabled={!isValidEmail}
-                        type='link'
+                        icon={<GooglePlusOutlined />}
+                        style={{ height: '40px' }}
+                        type='default'
+                        block
                     >
-                        Забыли пароль?
-                    </Button>
-                </Form.Item>
-                <Form.Item style={{ marginBottom: '0px' }}>
-                    <Button
-                        data-test-id='login-submit-button'
-                        block={true}
-                        type='primary'
-                        htmlType='submit'
-                    >
-                        Войти
-                    </Button>
-                    <Button icon={<GooglePlusOutlined />} type='default'>
                         Войти через Google
                     </Button>
-                </Form.Item>
+                </div>
             </Form>
         </>
     );

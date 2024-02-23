@@ -1,7 +1,37 @@
 .ConfirmEmail {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+}
+.container {
+    display: flex;
+    gap: 12px;
+}
+.character {
+    border: 1px solid var(--character-light-border);
+    border-radius: 2px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+}
+.bordered {
+    height: 40px;
 }
 
-.bordered {
-    border-color: var(--character-light-error);
+.inactive {
+    color: transparent;
+    background: none;
+}
+.selected {
+    color: transparent;
+    background: none;
+    outline: #000;
+}
+.filled {
+    color: #000;
 }

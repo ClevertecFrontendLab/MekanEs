@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     position: relative;
+    align-items: center;
     min-height: 100vh;
     backdrop-filter: blur(12px);
     background: rgba(121, 156, 212, 0.5);
@@ -22,32 +23,23 @@
 .content {
     padding: 64px 85.5px;
     position: absolute;
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 539px;
-    margin-top: 140px;
+}
+.padding {
+    padding: 64px 78px 54px;
+}
+@media (max-width: 470px) {
+    .content {
+        padding: 32px 16px;
+        width: 328px;
+    }
+    .padding {
+        padding: 32px 16px;
+    }
 }
 
 .margin {
     margin-top: 168px;
-}
-
-@media (max-width: 1024px) {
-    .content {
-        margin-top: 200px;
-    }
-    .margin {
-        margin-top: 228px;
-    }
-}
-@media (max-width: 575px) {
-    .content {
-        margin-top: 90px;
-        padding: 32px 85.5px;
-        width: 328px;
-    }
-    .margin {
-        margin-top: 114px;
-    }
 }

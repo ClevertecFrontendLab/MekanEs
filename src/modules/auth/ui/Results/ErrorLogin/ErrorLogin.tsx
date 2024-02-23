@@ -15,6 +15,7 @@ export const ErrorLogin: FC<ErrorLoginProps> = () => {
                     style={{
                         color: 'var(--character-light-warning)',
                         fontSize: '100px',
+                        width: '80px',
                     }}
                 />
             }

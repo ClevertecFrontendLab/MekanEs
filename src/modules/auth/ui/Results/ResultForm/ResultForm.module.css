@@ -1,4 +1,14 @@
 .ResultForm {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.resultBtn {
+    width: 100%;
+    background-color: var(--primary-light-6);
+}
+.description {
+    text-align: center;
 }

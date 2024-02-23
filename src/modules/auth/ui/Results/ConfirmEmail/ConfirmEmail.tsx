@@ -22,7 +22,9 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
     const confirm = async (code: string) => {
         try {
             const resp = await confirmEmail({ email: location.state.email, code });
+
             if ('data' in resp) {
+                console.log(resp, 'succes');
                 nav(Paths.AUTH_CHANGE_PASSWORD, defNavOption);
             } else {
                 throw Error();
@@ -45,38 +47,49 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
     return (
         <div className={clx(styles.ConfirmEmail)}>
             {isLoading && <LoaderModal />}
+
             {error ? (
                 <CloseCircleFilled
                     style={{
-                        color: 'var(--character-light-error)',
+                        color: '#FF4D4F',
                         fontSize: '100px',
+                        width: '81px',
                     }}
                 />
             ) : (
                 <ExclamationCircleFilled
                     style={{
-                        color: 'var(--blue-dark-5)',
+                        color: '#2F54EB',
                         fontSize: '100px',
+                        width: '81px',
                     }}
                 />
             )}
-            <Typography.Title>
-                Неверный код. Введите код для восстановления аккаунта
-            </Typography.Title>
-            <Typography.Text>
-                Произошла ошибка, попробуйте отправить форму еще раз. Мы отправили вам на e-mail{' '}
-                <b>{location.state.email}</b> шестизначный код. Введите его в поле ниже.
-            </Typography.Text>
+            <div>
+                <Typography.Title level={3} style={{ margin: '0' }}>
+                    Неверный код. Введите код для восстановления аккаунта
+                </Typography.Title>
+                <Typography.Text>
+                    Мы отправили вам на e-mail <b>{location.state.email}</b> шестизначный код.
+                    Введите его в поле ниже.
+                </Typography.Text>
+            </div>
             <VerificationInput
                 inputProps={{ 'data-test-id': 'verification-input' }}
                 classNames={{
-                    character: error ? clx('character', styles.bordered) : 'character',
+                    container: styles.container,
+                    character: error ? clx(styles.character, styles.bordered) : styles.character,
+                    characterInactive: styles.inactive,
+                    characterSelected: styles.selected,
+                    characterFilled: styles.filled,
                 }}
                 value={inputValue}
                 onChange={(value) => setInputValue(value)}
                 onComplete={handleFill}
             />
-            <Typography.Text>Не пришло письмо? Проверьте папку Спам. </Typography.Text>
+            <Typography.Text style={{ color: 'var(--character-light-secondary-45)' }}>
+                Не пришло письмо? Проверьте папку Спам.{' '}
+            </Typography.Text>
         </div>
     );
 };
