@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import styles from './Layout.module.css';
-import { AppFooter, AppHeader, Sidebar } from '@shared/components';
+import { AppFooter, AppHeader, LoaderModal, Sidebar } from '@shared/components';
 import { useAppDispatch } from '@shared/hooks';
 import { push } from 'redux-first-history';
 
@@ -30,7 +30,7 @@ export const AppLayout: FC = () => {
                     <Header style={{ height: 'auto', padding: '0', width: '100%' }}>
                         <AppHeader mobile={mobile} />
                     </Header>
-                    <Suspense fallback={'Loading'}>
+                    <Suspense fallback={<LoaderModal />}>
                         <Content className={styles.content}>
                             <Outlet />
                         </Content>
