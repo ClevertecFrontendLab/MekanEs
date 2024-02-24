@@ -31,7 +31,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
 
     return (
         <Sider
-            breakpoint='sm'
+            breakpoint='md'
             onBreakpoint={handleBreak}
             trigger={null}
             width={mobile ? '106px' : '208px'}

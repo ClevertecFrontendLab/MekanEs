@@ -61,7 +61,7 @@ button.settingsBtn {
     }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 768px) {
     button.settingsBtn {
         background: white;
         padding: 7px 4px;

@@ -16,7 +16,6 @@ export const ErrorCheckEmailNoEmail: FC<ErrorCheckEmailNoEmailProps> = () => {
             buttonText='Попробовать снова'
             redirect={Paths.AUTH}
             redirectOpt={{ state: { clear: true } }}
-            buttonWidth='74px'
             id='check-retry-button'
         />
     );

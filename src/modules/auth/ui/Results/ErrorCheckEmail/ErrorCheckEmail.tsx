@@ -15,6 +15,7 @@ export const ErrorCheckEmail: FC<ErrorCheckEmailProps> = () => {
             buttonText='Назад'
             id='check-back-button'
             redirect={Paths.AUTH}
+            buttonWidth='74px'
             redirectOpt={{ state: { action: 'checkMail' } }}
         />
     );

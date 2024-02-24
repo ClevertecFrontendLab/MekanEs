@@ -11,3 +11,14 @@
     justify-content: center;
     align-items: center;
 }
+@media (max-width: 1024px) {
+    .LoaderModal {
+        min-height: 1194px;
+    }
+}
+
+@media (max-width: 575px) {
+    .LoaderModal {
+        min-height: 800px;
+    }
+}
