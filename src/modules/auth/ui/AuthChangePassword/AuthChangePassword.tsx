@@ -18,6 +18,7 @@ export interface ConfirmPassword {
 }
 export const AuthChangePassword: FC = () => {
     const [changePassword, { isLoading, error: changePasswordError }] = useChangePasswordMutation();
+    const [error, setError] = useState(false);
     const location = useLocation();
     const changeValues = useAppSelector(getChangeValues);
     const [disabledSave, setDisabledSave] = useState(false);
@@ -27,23 +28,25 @@ export const AuthChangePassword: FC = () => {
         async (values: ConfirmPassword) => {
             try {
                 dispatch(authActions.setChangeValues(values));
-                await changePassword({
+                const resp = await changePassword({
                     password: values.password,
                     confirmPassword: values.password,
                 });
-
+                if ('error' in resp) {
+                    throw new Error();
+                }
                 navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
             } catch (e) {
-                console.log(e);
+                setError(true);
             }
         },
         [changePassword, dispatch, navigate],
     );
     useEffect(() => {
-        if (changePasswordError) {
+        if (changePasswordError || error) {
             navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
         }
-    }, [navigate, changePasswordError]);
+    }, [navigate, changePasswordError, error]);
 
     useEffect(() => {
         if (location?.state?.action === 'changeAgain') {

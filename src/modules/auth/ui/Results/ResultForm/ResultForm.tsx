@@ -43,7 +43,6 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
     };
 
     if (location?.state?.from !== defNavOption.state.from) {
-        console.log('auto redirect', location);
         return <Navigate to={Paths.AUTH} />;
     }
 
