@@ -53,7 +53,7 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
                 <b>{location.state.email}</b>
             )} шестизначный код.Введите его в поле ниже.`}
             verification={
-                <>
+                <div className={styles.varificationContainer}>
                     <VerificationInput
                         inputProps={{ 'data-test-id': 'verification-input' }}
                         classNames={{
@@ -73,7 +73,7 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
                     <Typography.Text style={{ color: 'var(--character-light-secondary-45)' }}>
                         Не пришло письмо? Проверьте папку Спам.
                     </Typography.Text>
-                </>
+                </div>
             }
         />
     );
