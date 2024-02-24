@@ -1,25 +1,39 @@
 import { FC, ReactNode } from 'react';
 import clx from 'classnames';
 import styles from './ResultForm.module.css';
-import { Button, Typography } from 'antd';
+import { Button, Card, Result } from 'antd';
 import { Navigate, NavigateOptions, useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
+import { ResultStatusType } from 'antd/lib/result';
 interface ResultFormProps {
-    icon: ReactNode;
     title: string;
     subTitle: string;
-    buttonText: string;
+    buttonText?: string;
     onClick?: () => void;
     redirect?: Paths;
-    id: string;
+    id?: string;
     redirectOpt?: NavigateOptions;
+    status: ResultStatusType;
+    verification?: ReactNode;
+    buttonWidth?: string;
 }
 
 export const ResultForm: FC<ResultFormProps> = (props) => {
     const location = useLocation();
 
-    const { icon, title, subTitle, buttonText, onClick, redirect, id, redirectOpt } = props;
+    const {
+        title,
+        subTitle,
+        buttonText,
+        onClick,
+        redirect,
+        id,
+        redirectOpt,
+        status,
+        verification,
+        buttonWidth,
+    } = props;
     const nav = useNavigate();
     const handleClick = () => {
         onClick?.();
@@ -34,22 +48,28 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
     }
 
     return (
-        <div className={clx(styles.ResultForm)}>
-            {icon}
-            <div className={styles.description}>
-                <Typography.Title level={3} style={{ marginBottom: '0' }}>
-                    {title}
-                </Typography.Title>
-                <Typography.Text>{subTitle}</Typography.Text>
-            </div>
-            <Button
-                className={styles.resultBtn}
-                data-test-id={id}
-                onClick={handleClick}
-                type='primary'
-            >
-                {buttonText}
-            </Button>
-        </div>
+        <Card style={{ margin: '0 16px' }}>
+            <Result
+                className={clx(styles.ResultForm)}
+                status={status}
+                title={title}
+                subTitle={subTitle}
+                extra={
+                    verification ? (
+                        verification
+                    ) : (
+                        <Button
+                            style={buttonWidth ? { width: buttonWidth } : {}}
+                            className={styles.resultBtn}
+                            data-test-id={id}
+                            onClick={handleClick}
+                            type='primary'
+                        >
+                            {buttonText}
+                        </Button>
+                    )
+                }
+            />
+        </Card>
     );
 };

@@ -1,5 +1,6 @@
 .bg {
     background: url('../../assets/images/main_page.png') no-repeat;
+    background-size: cover;
 }
 .Layout {
     display: flex;

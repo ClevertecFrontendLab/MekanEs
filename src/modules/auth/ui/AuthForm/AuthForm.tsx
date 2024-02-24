@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import styles from '../AuthLayout/Form.module.css';
+import Fstyles from '../CommonStyles/Form.module.css';
 import clx from 'classnames';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -109,9 +109,9 @@ export const AuthForm: FC = () => {
                 }}
                 onFinish={onFinish}
                 layout='vertical'
-                className={clx(styles.Form)}
+                className={clx(Fstyles.Form)}
             >
-                <div className={styles.inputs}>
+                <div className={Fstyles.inputs}>
                     <Form.Item
                         name='email'
                         rules={[
@@ -151,14 +151,14 @@ export const AuthForm: FC = () => {
                         />
                     </Form.Item>
                 </div>
-                <div className={styles['check-block']}>
+                <div className={Fstyles['check-block']}>
                     <Form.Item name='remember' valuePropName='checked' noStyle>
                         <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                     </Form.Item>
                     <Form.Item noStyle>
                         <Button
                             data-test-id='login-forgot-button'
-                            className={styles.checkMail}
+                            className={Fstyles.checkMail}
                             onClick={checkEmailHandle}
                             disabled={!isValidEmail}
                             type='link'
@@ -167,7 +167,7 @@ export const AuthForm: FC = () => {
                         </Button>
                     </Form.Item>
                 </div>
-                <div className={styles.inputs}>
+                <div className={Fstyles.inputs}>
                     <Form.Item style={{ marginBottom: '0px' }}>
                         <Button
                             data-test-id='login-submit-button'

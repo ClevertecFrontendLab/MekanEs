@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import clx from 'classnames';
 import styles from './ResultProvider.module.css';
 import { Outlet, useLocation } from 'react-router-dom';
-import bgImage from '@shared/assets/images/main_page.png';
+import bgImage from '@shared/assets/images/auth-bg.png';
 import { Card } from 'antd';
 import { Paths } from '@shared/types/common';
 import { useAppDispatch } from '@shared/hooks';
@@ -22,13 +22,11 @@ export const ResultProvider: FC = () => {
         } else {
             setPadding('');
         }
-    }, [dispatch, location.pathname, location.state.email]);
+    }, [dispatch, location.pathname, location.state.from]);
     return (
-        <div style={{ backgroundImage: `url(${bgImage})` }}>
+        <div style={{ background: `url(${bgImage}) no-repeat`, backgroundSize: 'cover' }}>
             <div className={clx(styles.overlay)}>
-                <Card className={clx(styles.content, padding)}>
-                    <Outlet />
-                </Card>
+                <Outlet />
             </div>
         </div>
     );

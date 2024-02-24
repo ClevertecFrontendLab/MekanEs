@@ -10,15 +10,7 @@ interface RegistrationErrorUEProps {
 export const RegistrationErrorUE: FC<RegistrationErrorUEProps> = () => {
     return (
         <ResultForm
-            icon={
-                <CloseCircleFilled
-                    style={{
-                        color: '#FF4D4F',
-                        fontSize: '100px',
-                        width: '81px',
-                    }}
-                />
-            }
+            status={'error'}
             title='Данные не сохранились'
             subTitle='Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.'
             buttonText='Назад к регистрации'

@@ -10,15 +10,7 @@ interface RegistrationErrorProps {
 export const RegistrationError: FC<RegistrationErrorProps> = () => {
     return (
         <ResultForm
-            icon={
-                <CloseCircleFilled
-                    style={{
-                        color: '#FF4D4F',
-                        fontSize: '100px',
-                        width: '81px',
-                    }}
-                />
-            }
+            status={'error'}
             title='Данные не сохранились'
             subTitle='Что-то пошлло не так и ваша регистрация не завершилась. Попробуйте еще раз.'
             buttonText='Повторить'

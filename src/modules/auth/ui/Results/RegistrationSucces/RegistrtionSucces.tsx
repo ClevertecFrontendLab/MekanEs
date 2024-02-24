@@ -10,15 +10,7 @@ interface RegistrationSuccesProps {
 export const RegistrationSucces: FC<RegistrationSuccesProps> = () => {
     return (
         <ResultForm
-            icon={
-                <CheckCircleFilled
-                    style={{
-                        color: '#52C41A',
-                        fontSize: '100px',
-                        width: '81px',
-                    }}
-                />
-            }
+            status={'success'}
             title='Регистрация успешна'
             subTitle='Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль.'
             buttonText='Войти'

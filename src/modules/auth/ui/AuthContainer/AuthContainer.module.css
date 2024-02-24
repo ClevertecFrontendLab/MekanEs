@@ -7,7 +7,7 @@
     margin-bottom: 110px;
 }
 .margin {
-    margin-bottom: 110px;
+    margin-bottom: 0;
 }
 @media (max-width: 1024px) {
     .margin {
@@ -49,5 +49,47 @@
 @media (max-width: 470px) {
     .gap {
         gap: 24px;
+    }
+}
+
+.authCard {
+    margin-top: 140px;
+}
+
+@media (max-width: 1024px) {
+    .authCard {
+        margin-top: 200px;
+    }
+}
+
+@media (max-width: 575px) {
+    .authCard {
+        margin-top: 90px;
+    }
+}
+
+.regCard {
+    margin-top: 168px;
+}
+
+@media (max-width: 1024px) {
+    .regCard {
+        margin-top: 228px;
+    }
+}
+
+@media (max-width: 575px) {
+    .regCard {
+        margin-top: 114px;
+    }
+}
+
+.formCard {
+    padding: 64px 85.5px;
+    height: fit-content;
+}
+@media (max-width: 575px) {
+    .formCard {
+        padding: 32px 16px;
     }
 }

@@ -1,10 +1,14 @@
 .ResultForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+    padding: 64px 32px;
+    width: 539px;
 }
 
+@media (max-width: 585px) {
+    .ResultForm {
+        padding: 32px 16px;
+        width: 328px;
+    }
+}
 .resultBtn {
     width: 100%;
     background-color: var(--primary-light-6);

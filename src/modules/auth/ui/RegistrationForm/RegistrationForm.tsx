@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import styles from '../AuthLayout/Form.module.css';
+import Fstyles from '../CommonStyles/Form.module.css';
 import clx from 'classnames';
-import { Button, Form, Input } from 'antd';
+import { Button,  Form, Input } from 'antd';
 import { useRegisterMutation } from '@modules/auth/authApi/authApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginProps } from '@shared/types/auth';
@@ -67,7 +67,7 @@ export const RegistrationForm: FC = () => {
             initialValues={undefined}
             layout='vertical'
             requiredMark='optional'
-            className={clx(styles.Form)}
+            className={clx(Fstyles.Form)}
             onFieldsChange={(_, allFields) => {
                 const isValid = allFields.every(({ errors }) => !errors || errors.length === 0);
                 if (isValid) {
@@ -78,7 +78,7 @@ export const RegistrationForm: FC = () => {
             }}
         >
             {isLoading && <LoaderModal />}
-            <div className={clx(styles.inputs, styles.margin)}>
+            <div className={clx(Fstyles.inputs, Fstyles.margin)}>
                 <Form.Item
                     name='email'
                     rules={[
@@ -98,7 +98,7 @@ export const RegistrationForm: FC = () => {
                 <Form.Item
                     name='password'
                     help={
-                        <div className={styles.help}>
+                        <div className={Fstyles.help}>
                             Пароль не менее 8 символов, с заглавной буквой и цифрой
                         </div>
                     }
@@ -143,7 +143,7 @@ export const RegistrationForm: FC = () => {
                     />
                 </Form.Item>
             </div>
-            <div className={styles.inputs}>
+            <div className={Fstyles.inputs}>
                 <Form.Item style={{ marginBottom: '0px' }}>
                     <Button
                         style={{ height: '40px' }}

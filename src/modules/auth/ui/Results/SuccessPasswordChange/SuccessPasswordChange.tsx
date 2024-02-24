@@ -10,14 +10,7 @@ interface SuccesPasswordChangeProps {
 export const SuccesPasswordChange: FC<SuccesPasswordChangeProps> = () => {
     return (
         <ResultForm
-            icon={
-                <CheckCircleFilled
-                    style={{
-                        color: 'var(--character-light-success)',
-                        fontSize: '100px',
-                    }}
-                />
-            }
+            status={'success'}
             title='Пароль успешно изменен'
             subTitle='Теперь можно войти в аккаунт, используя свой логин и новый пароль.'
             buttonText='Вход'

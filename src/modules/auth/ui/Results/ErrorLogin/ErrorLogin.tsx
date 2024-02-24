@@ -10,15 +10,7 @@ interface ErrorLoginProps {
 export const ErrorLogin: FC<ErrorLoginProps> = () => {
     return (
         <ResultForm
-            icon={
-                <WarningFilled
-                    style={{
-                        color: 'var(--character-light-warning)',
-                        fontSize: '100px',
-                        width: '80px',
-                    }}
-                />
-            }
+            status={'warning'}
             title='Вход не выполнен'
             subTitle='Что-то пошло не так. Попробуйте еще раз.'
             buttonText='Повторить'
