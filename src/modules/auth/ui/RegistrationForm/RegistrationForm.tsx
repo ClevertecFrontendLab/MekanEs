@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import Fstyles from '../CommonStyles/Form.module.css';
 import clx from 'classnames';
-import { Button,  Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useRegisterMutation } from '@modules/auth/authApi/authApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginProps } from '@shared/types/auth';
@@ -157,6 +157,7 @@ export const RegistrationForm: FC = () => {
                 </Form.Item>
 
                 <Button
+                    className={Fstyles.googleBtn}
                     icon={<GooglePlusOutlined />}
                     style={{ height: '40px' }}
                     type='default'

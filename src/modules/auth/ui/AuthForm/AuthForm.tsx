@@ -180,6 +180,7 @@ export const AuthForm: FC = () => {
                         </Button>{' '}
                     </Form.Item>
                     <Button
+                        className={Fstyles.googleBtn}
                         icon={<GooglePlusOutlined />}
                         style={{ height: '40px' }}
                         type='default'

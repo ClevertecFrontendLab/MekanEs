@@ -197,3 +197,15 @@ h3.ant-typography {
 .ant-btn {
     font-size: 16px;
 }
+.ant-result-icon > span {
+    padding: 4px;
+}
+.ant-result-title {
+    line-height: 1.31;
+}
+.ant-result-subtitle {
+    line-height: 1.31;
+}
+.ant-result-extra > * {
+    height: 40px;
+}

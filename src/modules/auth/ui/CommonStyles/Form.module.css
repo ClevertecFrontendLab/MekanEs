@@ -43,3 +43,9 @@
         margin-bottom: 10px;
     }
 }
+
+@media (max-width: 575px) {
+    .googleBtn > span > svg {
+        display: none;
+    }
+}

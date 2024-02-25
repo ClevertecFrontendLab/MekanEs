@@ -9,13 +9,14 @@ interface ErrorCheckEmailProps {
 export const ErrorCheckEmail: FC<ErrorCheckEmailProps> = () => {
     return (
         <ResultForm
+            addPadding={true}
             status={500}
             title='Что-то пошло не так'
             subTitle='Произошла ошибка, попробуйте отправить форму еще раз.'
             buttonText='Назад'
             id='check-back-button'
             redirect={Paths.AUTH}
-            buttonWidth='fit-content'
+            buttonWidth='74px'
             redirectOpt={{ state: { action: 'checkMail' } }}
         />
     );

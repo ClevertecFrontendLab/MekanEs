@@ -17,6 +17,7 @@ interface ResultFormProps {
     status: ResultStatusType;
     verification?: ReactNode;
     buttonWidth?: string;
+    addPadding?: boolean;
 }
 
 export const ResultForm: FC<ResultFormProps> = (props) => {
@@ -33,6 +34,7 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
         status,
         verification,
         buttonWidth,
+        addPadding = false,
     } = props;
     const nav = useNavigate();
     const handleClick = () => {
@@ -49,7 +51,7 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
     return (
         <Card style={{ margin: '0 16px' }}>
             <Result
-                className={clx(styles.ResultForm)}
+                className={clx(styles.ResultForm, { [styles.extraPadding]: addPadding })}
                 status={status}
                 title={title}
                 subTitle={subTitle}

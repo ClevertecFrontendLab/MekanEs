@@ -1,5 +1,5 @@
 .ResultForm {
-    padding: 64px 32px;
+    padding: 64px 84px;
     width: 539px;
 }
 
@@ -15,4 +15,9 @@
 }
 .description {
     text-align: center;
+}
+@media (max-width: 475px) {
+    .extraPadding {
+        padding: 64px 16px 56px;
+    }
 }
