@@ -1,0 +1,36 @@
+.bg {
+    background: url('../../assets/images/main_page.png') no-repeat;
+    background-size: cover;
+}
+.Layout {
+    display: flex;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
+    background-size: cover;
+    min-height: 1020px;
+}
+
+@media (max-width: 1024px) {
+    .Layout {
+        min-height: 1194px;
+    }
+}
+
+@media (max-width: 575px) {
+    .Layout {
+        min-height: 640px;
+    }
+}
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    padding: 24px;
+    flex: auto;
+}
+@media (max-width: 575px) {
+    .content {
+        padding: 24px 16px;
+    }
+}

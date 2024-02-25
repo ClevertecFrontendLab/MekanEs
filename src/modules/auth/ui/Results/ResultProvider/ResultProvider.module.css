@@ -1,0 +1,45 @@
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: none;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    min-height: 100vh;
+    backdrop-filter: blur(12px);
+    background: rgba(121, 156, 212, 0.5);
+}
+
+.bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.content {
+    padding: 64px 85.5px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 539px;
+}
+.padding {
+    padding: 64px 78px 54px;
+}
+@media (max-width: 470px) {
+    .content {
+        padding: 32px 16px;
+        width: 328px;
+    }
+    .padding {
+        padding: 32px 16px;
+    }
+}
+
+.margin {
+    margin-top: 168px;
+}

@@ -1,0 +1,28 @@
+.RegistrationForm {
+    padding: 1px;
+}
+.help {
+    font-size: 14px;
+}
+
+.content {
+    padding: 64px 85.5px;
+    position: absolute;
+
+    width: 539px;
+}
+
+.margin {
+    margin-top: 168px;
+}
+
+@media (max-width: 1024px) {
+    .margin {
+        margin-top: 228px;
+    }
+}
+@media (max-width: 575px) {
+    .margin {
+        margin-top: 114px;
+    }
+}

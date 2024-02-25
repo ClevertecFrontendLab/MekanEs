@@ -1,0 +1,51 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.check-block {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkMail {
+    font-size: 16px;
+    padding: 4px 0;
+}
+@media (max-width: 575px) {
+    .checkMail {
+        font-size: 14px;
+        height: 18px;
+        padding: 0 8px;
+    }
+}
+
+.help {
+    font-size: 12px;
+    margin: 0 0 14px;
+}
+.margin {
+    margin-bottom: 22px;
+}
+
+@media (max-width: 575px) {
+    .help {
+        margin: 0;
+    }
+    .margin {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .googleBtn > span > svg {
+        display: none;
+    }
+}
