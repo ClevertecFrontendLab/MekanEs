@@ -21,7 +21,7 @@ import { RegistrationError } from './ui/Results/RegistrationError/RegistrationEr
 import { AuthChangePassword } from './ui/AuthChangePassword/AuthChangePassword';
 import { ErrorChangePassword } from './ui/Results/ErrorChangePassword/ErrorChangePassword';
 import { SuccesPasswordChange } from './ui/Results/SuccessPasswordChange/SuccessPasswordChange';
-useChangePasswordMutation;
+import { ResultProviderLazy as ResultProvider } from './ui/Results/ResultProvider/ResultProvider.async';
 export {
     AuthProvider,
     AuthContainer,
@@ -44,4 +44,5 @@ export {
     useCheckEmailMutation,
     useConfirmEmailMutation,
     useChangePasswordMutation,
+    ResultProvider,
 };

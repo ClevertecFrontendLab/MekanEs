@@ -9,7 +9,7 @@ import { useAppDispatch } from '@shared/hooks';
 import { push } from 'redux-first-history';
 import { defNavOption } from '@shared/constants/constants';
 
-export const ResultProvider: FC = () => {
+const ResultProvider: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -25,3 +25,4 @@ export const ResultProvider: FC = () => {
         </div>
     );
 };
+export default ResultProvider;

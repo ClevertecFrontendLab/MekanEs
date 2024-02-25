@@ -11,11 +11,11 @@ import {
     RegistrationError,
     RegistrationErrorUE,
     RegistrationSucces,
+    ResultProvider,
     SuccesPasswordChange,
 } from '@modules/auth';
 import { AppLayout } from '@shared/components';
 import { Paths } from '@shared/types/common';
-import { ResultProvider } from '@modules/auth/ui/Results/ResultProvider/ResultProvider';
 
 export const routes = (
     <Routes>
