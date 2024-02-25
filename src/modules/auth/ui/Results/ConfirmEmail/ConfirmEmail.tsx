@@ -1,11 +1,10 @@
 import { FC, useState } from 'react';
 import styles from './ConfirmEmail.module.css';
-import { CloseCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useConfirmEmailMutation } from '@modules/auth/authApi/authApi';
 import VerificationInput from 'react-verification-input';
 import clx from 'classnames';
-import { Card, Typography } from 'antd';
+import { Typography } from 'antd';
 import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
 import { LoaderModal } from '@shared/components';

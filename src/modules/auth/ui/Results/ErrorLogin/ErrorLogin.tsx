@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { WarningFilled } from '@ant-design/icons';
 import { ResultForm } from '../ResultForm/ResultForm';
 import { Paths } from '@shared/types/common';
 

@@ -209,3 +209,7 @@ h3.ant-typography {
 .ant-result-extra > * {
     height: 40px;
 }
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar,
+.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+    min-width: 50%;
+}
