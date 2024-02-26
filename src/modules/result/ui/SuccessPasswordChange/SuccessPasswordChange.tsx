@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { ResultForm } from '../ResultForm/ResultForm';
 import { Paths } from '@shared/types/common';
+import { ResultForm } from '@shared/components';
 
 interface SuccesPasswordChangeProps {
     className?: string;

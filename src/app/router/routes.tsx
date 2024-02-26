@@ -1,36 +1,34 @@
 import { Route, Routes } from 'react-router-dom';
 import { Auth, MainPage, NotFound } from '@pages/index';
+
+import { AppLayout } from '@shared/components';
+import { Paths } from '@shared/types/common';
+import { AuthChangePassword, AuthProvider, ConfirmEmail, ErrorLogin } from '@modules/auth';
 import {
-    AuthChangePassword,
-    AuthProvider,
-    ConfirmEmail,
     ErrorChangePassword,
     ErrorCheckEmail,
     ErrorCheckEmailNoEmail,
-    ErrorLogin,
     RegistrationError,
     RegistrationErrorUE,
     RegistrationSucces,
     ResultProvider,
     SuccesPasswordChange,
-} from '@modules/auth';
-import { AppLayout } from '@shared/components';
-import { Paths } from '@shared/types/common';
+} from '@modules/result';
 
 export const routes = (
     <Routes>
         <Route path={Paths.BASE} element={<AppLayout />}>
-            <Route element={<AuthProvider passIf={false} redirect={Paths.AUTH} />}>
+            <Route element={<AuthProvider passIf={false} redirectPath={Paths.AUTH} />}>
                 <Route path={Paths.MAIN} element={<MainPage />} />
             </Route>
         </Route>
 
-        <Route element={<AuthProvider withLayout passIf={true} redirect={Paths.MAIN} />}>
+        <Route element={<AuthProvider withLayout passIf={true} redirectPath={Paths.MAIN} />}>
             <Route path={Paths.REGISTRATION} element={<Auth />} />
             <Route path={Paths.AUTH} element={<Auth />} />
         </Route>
 
-        <Route element={<AuthProvider passIf={true} redirect={Paths.MAIN} />}>
+        <Route element={<AuthProvider passIf={true} redirectPath={Paths.MAIN} />}>
             <Route element={<ResultProvider />}>
                 <Route path={Paths.AUTH_CHANGE_PASSWORD} element={<AuthChangePassword />} />
                 <Route path={Paths.RESULT_ERROR_LOGIN} element={<ErrorLogin />} />

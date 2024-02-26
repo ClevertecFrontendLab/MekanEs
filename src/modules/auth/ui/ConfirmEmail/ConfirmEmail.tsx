@@ -7,8 +7,8 @@ import clx from 'classnames';
 import { Typography } from 'antd';
 import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
-import { LoaderModal } from '@shared/components';
-import { ResultForm } from '../ResultForm/ResultForm';
+import { LoaderModal, ResultForm } from '@shared/components';
+
 interface ConfirmEmailProps {
     className?: string;
 }
