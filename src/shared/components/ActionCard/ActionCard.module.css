@@ -14,7 +14,7 @@
 
 .block {
     margin: 0 auto;
-    background: var(--character-light-primary-inverse);
+    background: white;
     padding: 12px 24px;
     display: flex;
     justify-content: center;

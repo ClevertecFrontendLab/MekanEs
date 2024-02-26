@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import clx from 'classnames';
 import styles from './LoaderModal.module.css';
-import { Loader } from '..';
+import { Loader } from './Loader';
 import { Portal } from '../Portal/Portal';
 
 interface LoaderModalProps {
