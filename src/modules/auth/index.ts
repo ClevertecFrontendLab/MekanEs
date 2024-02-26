@@ -21,7 +21,7 @@ import { RegistrationError } from './ui/Results/RegistrationError/RegistrationEr
 import { AuthChangePassword } from './ui/AuthChangePassword/AuthChangePassword';
 import { ErrorChangePassword } from './ui/Results/ErrorChangePassword/ErrorChangePassword';
 import { SuccesPasswordChange } from './ui/Results/SuccessPasswordChange/SuccessPasswordChange';
-import { ResultProviderLazy as ResultProvider } from './ui/Results/ResultProvider/ResultProvider.async';
+import ResultProvider from './ui/Results/ResultProvider/ResultProvider';
 export {
     AuthProvider,
     AuthContainer,

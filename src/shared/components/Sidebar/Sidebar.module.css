@@ -1,6 +1,6 @@
 .Sidebar {
     box-shadow: 0 2px 8px 0 rgba(36, 36, 36, 0.15);
-    background: var(--character-light-primary-inverse);
+    background: white;
     position: relative;
 }
 @media (max-width: 575px) {

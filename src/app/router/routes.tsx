@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Auth, MainPage } from '@pages/index';
+import { Auth, MainPage, NotFound } from '@pages/index';
 import {
     AuthChangePassword,
     AuthProvider,
@@ -24,10 +24,12 @@ export const routes = (
                 <Route path={Paths.MAIN} element={<MainPage />} />
             </Route>
         </Route>
+
         <Route element={<AuthProvider withLayout passIf={true} redirect={Paths.MAIN} />}>
             <Route path={Paths.REGISTRATION} element={<Auth />} />
             <Route path={Paths.AUTH} element={<Auth />} />
         </Route>
+
         <Route element={<AuthProvider passIf={true} redirect={Paths.MAIN} />}>
             <Route element={<ResultProvider />}>
                 <Route path={Paths.AUTH_CHANGE_PASSWORD} element={<AuthChangePassword />} />
@@ -48,5 +50,6 @@ export const routes = (
                 <Route path={Paths.RESULT_ERROR_CHECK_EMAIL} element={<ErrorCheckEmail />} />
             </Route>
         </Route>
+        <Route path='*' element={<NotFound />} />
     </Routes>
 );
