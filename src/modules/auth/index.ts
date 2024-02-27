@@ -12,7 +12,7 @@ import { AuthContainer } from './ui/AuthContainer/AuthContainer';
 import { AuthLayout } from './ui/AuthLayout/AuthLayout';
 import { AuthProvider } from './ui/AuthProvider/AuthProvider';
 import { ErrorLogin } from '../result/ui/ErrorLogin/ErrorLogin';
-import { AuthChangePassword } from './ui/AuthChangePassword/AuthChangePassword';
+import { AuthChangePasswordLazy as AuthChangePassword } from './ui/AuthChangePassword/AuthChangePassword.async';
 import { ConfirmEmail } from './ui/ConfirmEmail/ConfirmEmail';
 export {
     AuthProvider,

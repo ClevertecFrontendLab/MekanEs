@@ -20,19 +20,15 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
     const [confirmEmail, { isLoading }] = useConfirmEmailMutation();
     const [inputValue, setInputValue] = useState('');
     const confirm = async (code: string) => {
-        try {
-            const resp = await confirmEmail({ email: location.state.email, code });
-
-            if ('data' in resp) {
-                console.log(resp, 'succes');
+        confirmEmail({ email: location.state.email, code })
+            .unwrap()
+            .then(() => {
                 nav(Paths.AUTH_CHANGE_PASSWORD, defNavOption);
-            } else {
-                throw Error();
-            }
-        } catch (e) {
-            setInputValue('');
-            setError(e);
-        }
+            })
+            .catch((e) => {
+                setInputValue('');
+                setError(e);
+            });
     };
 
     const handleFill = (code?: string) => {

@@ -15,7 +15,7 @@ import { LoaderModal } from '@shared/components';
 import { AuthFormValues } from '../../types';
 import { getAuthValues } from '@modules/auth/model/authSelectors';
 
-export const AuthForm: FC = () => {
+const AuthForm: FC = () => {
     const authValues = useAppSelector(getAuthValues);
 
     const [isValidEmail, setIsValidEmail] = useState<boolean | string>(authValues?.email || true);
@@ -29,37 +29,39 @@ export const AuthForm: FC = () => {
     const navigate = useNavigate();
     const onFinish = async (values: AuthFormValues) => {
         if (!disabledSave) {
-            try {
-                dispatch(authActions.setAuthValues(values));
-                const { accessToken } = await login(values).unwrap();
-                dispatch(authActions.setAuthToken(accessToken));
-                if (values.remember) {
-                    localStorage.setItem(LS_AuthKey, accessToken);
-                }
-                navigate(Paths.MAIN);
-            } catch (e) {
-                navigate(Paths.RESULT_ERROR_LOGIN, defNavOption);
-            }
+            login(values)
+                .unwrap()
+                .then(({ accessToken }) => {
+                    dispatch(authActions.setAuthToken(accessToken));
+                    if (values.remember) {
+                        localStorage.setItem(LS_AuthKey, accessToken);
+                    }
+                    navigate(Paths.MAIN);
+                })
+                .catch(() => {
+                    navigate(Paths.RESULT_ERROR_LOGIN, defNavOption);
+                });
         }
     };
     const checkEmailHandle = useCallback(async () => {
-        try {
-            if (typeof isValidEmail === 'string') {
-                dispatch(
-                    authActions.setAuthValues({
-                        email: isValidEmail,
-                        password: authValues?.password || '',
-                        remember: authValues?.remember || false,
-                    }),
-                );
-                await checkEmail({ email: isValidEmail }).unwrap();
-
-                navigate(Paths.CONFIRM_EMAIL, {
-                    state: { email: isValidEmail, ...defNavOption.state },
+        if (typeof isValidEmail === 'string') {
+            dispatch(
+                authActions.setAuthValues({
+                    email: isValidEmail,
+                    password: authValues?.password || '',
+                    remember: authValues?.remember || false,
+                }),
+            );
+            checkEmail({ email: isValidEmail })
+                .unwrap()
+                .then(() => {
+                    navigate(Paths.CONFIRM_EMAIL, {
+                        state: { email: isValidEmail, ...defNavOption.state },
+                    });
+                })
+                .catch(() => {
+                    dispatch(push(Paths.RESULT_ERROR_NO_EMAIL, defNavOption));
                 });
-            }
-        } catch (e) {
-            dispatch(push(Paths.RESULT_ERROR_NO_EMAIL, defNavOption));
         }
     }, [authValues?.password, authValues?.remember, checkEmail, dispatch, isValidEmail, navigate]);
 
@@ -193,3 +195,4 @@ export const AuthForm: FC = () => {
         </>
     );
 };
+export default AuthForm;

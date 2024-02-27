@@ -4,9 +4,9 @@ import CStyles from '../CommonStyles/CommonStyles.module.css';
 import { Card, Tabs } from 'antd';
 import Logo from '@shared/assets/icons/form-logo.svg?react';
 import { FC, useEffect, useState } from 'react';
-import { AuthForm } from '../AuthForm/AuthForm';
+import { AuthFormLazy as AuthForm } from '../AuthForm/AuthForm.async';
 import { Link, useLocation } from 'react-router-dom';
-import { RegistrationForm } from '../RegistrationForm/RegistrationForm';
+import { RegistrationFormLazy as RegistrationForm } from '../RegistrationForm/RegistrationForm.async';
 import { Paths } from '@shared/types/common';
 
 export const AuthContainer: FC = () => {

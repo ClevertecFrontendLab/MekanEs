@@ -16,7 +16,7 @@ import { getChangeValues } from '@modules/auth/model/authSelectors';
 export interface ConfirmPassword {
     password: string;
 }
-export const AuthChangePassword: FC = () => {
+const AuthChangePassword: FC = () => {
     const [changePassword, { isLoading, error: changePasswordError }] = useChangePasswordMutation();
     const [error, setError] = useState(false);
     const location = useLocation();
@@ -25,20 +25,19 @@ export const AuthChangePassword: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const onFinish = useCallback(
-        async (values: ConfirmPassword) => {
-            try {
-                dispatch(authActions.setChangeValues(values));
-                const resp = await changePassword({
-                    password: values.password,
-                    confirmPassword: values.password,
+        (values: ConfirmPassword) => {
+            dispatch(authActions.setChangeValues(values));
+            changePassword({
+                password: values.password,
+                confirmPassword: values.password,
+            })
+                .unwrap()
+                .then(() => {
+                    navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
+                })
+                .catch((e) => {
+                    setError(Boolean(e));
                 });
-                if ('error' in resp) {
-                    throw new Error();
-                }
-                navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
-            } catch (e) {
-                setError(true);
-            }
         },
         [changePassword, dispatch, navigate],
     );
@@ -146,3 +145,4 @@ export const AuthChangePassword: FC = () => {
         </Card>
     );
 };
+export default AuthChangePassword;

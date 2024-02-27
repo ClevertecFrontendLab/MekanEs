@@ -12,16 +12,21 @@
 }
 
 .bg {
+    background: url('../../../../shared/assets/images/auth-bg.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
-    position: absolute;
+    :global {
+        .ant-btn {
+            font-size: 16px;
+        }
+    }
 }
 
 .content {
-    padding: 64px 85.5px;
+    padding: var(--result-desktop-padding);
     position: absolute;
     align-items: center;
     justify-content: center;
@@ -32,7 +37,7 @@
 }
 @media (max-width: 470px) {
     .content {
-        padding: 32px 16px;
+        padding: var(--result-mobile-padding);
         width: 328px;
     }
     .padding {

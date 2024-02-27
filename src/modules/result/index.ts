@@ -4,7 +4,7 @@ import { ErrorCheckEmailNoEmail } from './ui/ErrorCheckEmail/ErrorCheckEmailNoEm
 import { ErrorLogin } from './ui/ErrorLogin/ErrorLogin';
 import { RegistrationError } from './ui/RegistrationError/RegistrationError';
 import { RegistrationErrorUE } from './ui/RegistrationErrorUE/RegistrationErrorUE';
-import { RegistrationSucces } from './ui/RegistrationSucces/RegistrtionSucces';
+import { RegistrationSucces } from './ui/RegistrationSucces/RegistrationSucces';
 import ResultProvider from './ui/ResultProvider/ResultProvider';
 import { SuccesPasswordChange } from './ui/SuccessPasswordChange/SuccessPasswordChange';
 

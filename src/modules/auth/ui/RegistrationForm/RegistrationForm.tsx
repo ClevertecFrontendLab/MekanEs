@@ -17,7 +17,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 //     className?: string;
 // }
 
-export const RegistrationForm: FC = () => {
+const RegistrationForm: FC = () => {
     const [disabledSave, setDisabledSave] = useState(false);
     const location = useLocation();
     const regValues = useAppSelector(getRegValues);
@@ -27,14 +27,15 @@ export const RegistrationForm: FC = () => {
     const onFinish = useCallback(
         async (values: LoginProps) => {
             if (!disabledSave) {
-                try {
-                    dispatch(authActions.setRegValues(values));
-                    await register(values).unwrap();
-
-                    navigate(Paths.RESULT_SUCCESS, defNavOption);
-                } catch (e) {
-                    console.log(e);
-                }
+                dispatch(authActions.setRegValues(values));
+                register(values)
+                    .unwrap()
+                    .then(() => {
+                        navigate(Paths.RESULT_SUCCESS, defNavOption);
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
             }
         },
         [dispatch, navigate, register, disabledSave],
@@ -169,3 +170,4 @@ export const RegistrationForm: FC = () => {
         </Form>
     );
 };
+export default RegistrationForm;
