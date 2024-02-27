@@ -11,7 +11,7 @@ export const RegistrationError: FC<RegistrationErrorProps> = () => {
         <ResultForm
             status={'error'}
             title='Данные не сохранились'
-            subTitle='Что-то пошлло не так и ваша регистрация не завершилась. Попробуйте еще раз.'
+            subTitle='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте еще раз.'
             buttonText='Повторить'
             redirect={Paths.REGISTRATION}
             id='registration-retry-button'

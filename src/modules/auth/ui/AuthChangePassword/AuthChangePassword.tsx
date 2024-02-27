@@ -10,15 +10,14 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@shared/types/common';
 import { useChangePasswordMutation } from '../../authApi/authApi';
 import { LoaderModal } from '@shared/components';
-import { defNavOption } from '@shared/constants/constants';
+import { defNavOption, passwordRule } from '@shared/constants/constants';
 import { getChangeValues } from '@modules/auth/model/authSelectors';
 
 export interface ConfirmPassword {
     password: string;
 }
 const AuthChangePassword: FC = () => {
-    const [changePassword, { isLoading, error: changePasswordError }] = useChangePasswordMutation();
-    const [error, setError] = useState(false);
+    const [changePassword, { isLoading }] = useChangePasswordMutation();
     const location = useLocation();
     const changeValues = useAppSelector(getChangeValues);
     const [disabledSave, setDisabledSave] = useState(false);
@@ -35,17 +34,12 @@ const AuthChangePassword: FC = () => {
                 .then(() => {
                     navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
                 })
-                .catch((e) => {
-                    setError(Boolean(e));
+                .catch(() => {
+                    navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
                 });
         },
         [changePassword, dispatch, navigate],
     );
-    useEffect(() => {
-        if (changePasswordError || error) {
-            navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
-        }
-    }, [navigate, changePasswordError, error]);
 
     useEffect(() => {
         if (location?.state?.action === 'changeAgain') {
@@ -89,12 +83,7 @@ const AuthChangePassword: FC = () => {
                             </div>
                         }
                         rules={[
-                            {
-                                required: true,
-                                pattern: new RegExp(
-                                    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$',
-                                ),
-                            },
+                            passwordRule,
                             { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
                         ]}
                     >

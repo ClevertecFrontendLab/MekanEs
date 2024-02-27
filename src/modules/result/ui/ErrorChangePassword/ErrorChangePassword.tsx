@@ -12,7 +12,7 @@ export const ErrorChangePassword: FC<ErrorChangePasswordProps> = () => {
         <ResultForm
             status={'error'}
             title='Данные не сохранились'
-            subTitle='Что-то пошлло не так. Попробуйте еще раз.'
+            subTitle='Что-то пошло не так. Попробуйте еще раз.'
             buttonText='Повторить'
             id='change-retry-button'
             redirect={Paths.AUTH_CHANGE_PASSWORD}

@@ -16,8 +16,7 @@ interface ConfirmEmailProps {
 export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
     const location = useLocation();
     const nav = useNavigate();
-    const [error, setError] = useState<null | unknown>(null);
-    const [confirmEmail, { isLoading }] = useConfirmEmailMutation();
+    const [confirmEmail, { isLoading, error }] = useConfirmEmailMutation();
     const [inputValue, setInputValue] = useState('');
     const confirm = async (code: string) => {
         confirmEmail({ email: location.state.email, code })
@@ -25,9 +24,8 @@ export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
             .then(() => {
                 nav(Paths.AUTH_CHANGE_PASSWORD, defNavOption);
             })
-            .catch((e) => {
+            .catch(() => {
                 setInputValue('');
-                setError(e);
             });
     };
 
