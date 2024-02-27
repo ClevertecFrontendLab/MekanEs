@@ -13,10 +13,6 @@ import { authActions } from '@modules/auth/model/authSlice';
 import { defNavOption, emailRule, passwordRule } from '@shared/constants/constants';
 import { GooglePlusOutlined } from '@ant-design/icons';
 
-// interface RegistrationFormProps {
-//     className?: string;
-// }
-
 const RegistrationForm: FC = () => {
     const [disabledSave, setDisabledSave] = useState(false);
     const location = useLocation();

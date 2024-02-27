@@ -48,7 +48,6 @@ const AuthChangePassword: FC = () => {
     }, [changeValues, location, onFinish]);
 
     if (location?.state?.from !== defNavOption.state.from) {
-        console.log('redirecting');
         return <Navigate to={Paths.AUTH} />;
     }
     return (
