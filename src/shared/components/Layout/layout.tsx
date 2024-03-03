@@ -1,26 +1,34 @@
 import { FC, Suspense, useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import styles from './Layout.module.css';
 import { AppFooter, AppHeader, LoaderModal, Sidebar } from '@shared/components';
 import { useAppDispatch } from '@shared/hooks';
 import { push } from 'redux-first-history';
+import { authActions } from '@modules/auth/model/authSlice';
+import { LS_AuthKey } from '@shared/constants/constants';
 
 const { Header, Content } = Layout;
 export const AppLayout: FC = () => {
+    const [search] = useSearchParams();
     const [mobile, setMobile] = useState(false);
     const dispatch = useAppDispatch();
     const location = useLocation();
 
     useEffect(() => {
+        const accessToken = search.get('accessToken');
+        if (accessToken) {
+            dispatch(authActions.setAuthToken(accessToken));
+            localStorage.setItem(LS_AuthKey, accessToken);
+        }
         if (location.pathname === '/') {
             dispatch(push('/main'));
         }
         if (location.pathname.slice(-1) === '/') {
             dispatch(push(location.pathname.slice(0, -1)));
         }
-    }, [location.pathname, dispatch]);
+    }, [location.pathname, dispatch, search]);
     return (
         <div className={styles.bg}>
             <Layout className={styles.Layout} data-test-id={'app'}>
@@ -35,7 +43,7 @@ export const AppLayout: FC = () => {
                             <Outlet />
                         </Content>
                     </Suspense>
-                    <AppFooter />
+                    {location.pathname === '/main' && <AppFooter />}
                 </Layout>
             </Layout>{' '}
         </div>

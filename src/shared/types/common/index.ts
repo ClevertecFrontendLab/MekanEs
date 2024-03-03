@@ -13,8 +13,9 @@ export enum Paths {
     RESULT_ERROR_NO_EMAIL = '/result/error-check-email-no-exist',
     RESULT_ERROR_CHECK_EMAIL = '/result/error-check-email',
     RESULT_ERROR_CHANGE_PASSWORD = '/result/error-change-password',
+    FEEDBACK = '/feedbacks',
     //last
-    NOT_FOUND = '*',
+    NOT_FOUND = 'not-found',
 }
 
 export interface CustomResponseError {

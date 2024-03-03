@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Auth, MainPage, NotFound } from '@pages/index';
 
 import { AppLayout } from '@shared/components';
@@ -14,12 +14,14 @@ import {
     ResultProvider,
     SuccesPasswordChange,
 } from '@modules/result';
+import { Feedback } from '@pages/feedback/Feedback';
 
 export const routes = (
     <Routes>
         <Route path={Paths.BASE} element={<AppLayout />}>
             <Route element={<AuthProvider passIf={false} redirectPath={Paths.AUTH} />}>
                 <Route path={Paths.MAIN} element={<MainPage />} />
+                <Route path={Paths.FEEDBACK} element={<Feedback />} />
             </Route>
         </Route>
 
@@ -48,6 +50,7 @@ export const routes = (
                 <Route path={Paths.RESULT_ERROR_CHECK_EMAIL} element={<ErrorCheckEmail />} />
             </Route>
         </Route>
-        <Route path='*' element={<NotFound />} />
+        <Route path='*' element={<Navigate to={Paths.NOT_FOUND} />} />
+        <Route path={Paths.NOT_FOUND} element={<NotFound />} />
     </Routes>
 );

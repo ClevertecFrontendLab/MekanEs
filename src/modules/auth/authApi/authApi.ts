@@ -20,6 +20,7 @@ export const authApi = createApi({
                 body: credentials,
             }),
         }),
+
         register: builder.mutation<object, LoginProps>({
             query: (credentials) => ({
                 url: 'registration',

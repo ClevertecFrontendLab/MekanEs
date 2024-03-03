@@ -6,7 +6,14 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { authActions } from '../../model/authSlice';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LS_AuthKey, defNavOption, emailRule, passwordRule } from '@shared/constants/constants';
+import {
+    AUTH_PATH,
+    BASE_URL,
+    LS_AuthKey,
+    defNavOption,
+    emailRule,
+    passwordRule,
+} from '@shared/constants/constants';
 import { Paths } from '@shared/types/common';
 import { CustomResponseError } from '@shared/types/common';
 import { useCheckEmailMutation, useLoginMutation } from '@modules/auth';
@@ -16,10 +23,10 @@ import { getAuthValues } from '@modules/auth/model/authSelectors';
 
 const AuthForm: FC = () => {
     const authValues = useAppSelector(getAuthValues);
-
     const [isValidEmail, setIsValidEmail] = useState<boolean | string>(authValues?.email || true);
     const [login, { isLoading }] = useLoginMutation();
     const [checkEmail, { isLoading: isLoadingCheckEmail }] = useCheckEmailMutation();
+
     const location = useLocation();
 
     const [disabledSave, setDisabledSave] = useState(false);
@@ -41,6 +48,10 @@ const AuthForm: FC = () => {
                 });
         }
     };
+    const onAuthGoogle = () => {
+        window.location.href = BASE_URL + AUTH_PATH + 'google';
+    };
+
     const checkEmailHandle = useCallback(() => {
         if (typeof isValidEmail === 'string') {
             dispatch(
@@ -126,7 +137,9 @@ const AuthForm: FC = () => {
                 </div>
                 <div className={Fstyles['check-block']}>
                     <Form.Item name='remember' valuePropName='checked' noStyle>
-                        <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
+                        <Checkbox defaultChecked={false} data-test-id='login-remember'>
+                            Запомнить меня
+                        </Checkbox>
                     </Form.Item>
                     <Form.Item noStyle>
                         <Button
@@ -153,6 +166,9 @@ const AuthForm: FC = () => {
                         </Button>{' '}
                     </Form.Item>
                     <Button
+                        onClick={() => {
+                            onAuthGoogle();
+                        }}
                         className={Fstyles.googleBtn}
                         icon={<GooglePlusOutlined />}
                         style={{ height: '40px' }}

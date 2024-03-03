@@ -10,6 +10,7 @@ export const CreateFBQ = (additinal: string) =>
             if (token) {
                 headers.set('authorization', `Bearer ${token}`);
             }
+
             return headers;
         },
         credentials: 'include',
