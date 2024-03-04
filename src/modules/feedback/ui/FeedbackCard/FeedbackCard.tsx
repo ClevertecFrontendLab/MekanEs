@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './FeedbackCard.module.css';
 import { Avatar, Card, Rate, Typography } from 'antd';
 import { ServerFeedback } from '@shared/types/feedback';
-import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { RateCharacter } from '@shared/components/RateCharacter/RateCharacter';
 
 interface FeedbackCardProps {

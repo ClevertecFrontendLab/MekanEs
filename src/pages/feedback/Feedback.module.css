@@ -60,12 +60,11 @@
 .card {
     text-align: center;
     padding: 32px;
-
-    :global(.ant-card-body) {
-        display: flex;
-        flex-direction: column;
-        row-gap: 48px;
-    }
+}
+.card :global(.ant-card-body) {
+    display: flex;
+    flex-direction: column;
+    row-gap: 48px;
 }
 .title {
     color: var(--primary-light-6);

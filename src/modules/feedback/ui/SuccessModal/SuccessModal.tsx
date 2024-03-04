@@ -1,7 +1,7 @@
 import { feedbackModalBodyStyle } from '@modules/feedback/model/constants';
 import { ResultForm } from '@shared/components';
 import Modal from 'antd/lib/modal/Modal';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
 interface SuccessModalProps {
     className?: string;

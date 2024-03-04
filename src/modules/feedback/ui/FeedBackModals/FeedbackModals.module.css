@@ -2,11 +2,11 @@
     padding: 0;
     width: auto !important;
     max-width: 100%;
-    :global(.ant-modal-content) {
-        border: none;
-        background: none;
-        box-shadow: none;
-    }
+}
+.feedbackModal :global(.ant-modal-content) {
+    border: none;
+    background: none;
+    box-shadow: none;
 }
 .btnContainer {
     display: flex;

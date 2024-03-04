@@ -11,7 +11,6 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { authActions } from '@modules/auth/model/authSlice';
 import { LoaderModal } from '@shared/components';
 import { Button } from 'antd';
-
 interface FeedbackModalsProps {
     error: CustomResponseError | SerializedError | undefined;
     isFetching: boolean;

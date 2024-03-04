@@ -1,15 +1,12 @@
-.FeedbackCard {
-    :global(.ant-card-body) {
-        display: flex;
-        padding: 16px;
-        gap: 12px;
-    }
+.FeedbackCard :global(.ant-card-body) {
+    display: flex;
+    padding: 16px;
+    gap: 12px;
 }
+
 @media (max-width: 475px) {
-    .FeedbackCard {
-        :global(.ant-card-body) {
-            flex-direction: column;
-        }
+    .FeedbackCard :global(.ant-card-body) {
+        flex-direction: column;
     }
 }
 
@@ -20,9 +17,9 @@
     align-items: center;
     row-gap: 12px;
     min-width: 174px;
-    :global(.ant-card-meta-avatar) {
-        padding: 0;
-    }
+}
+.meta :global(.ant-card-meta-avatar) {
+    padding: 0;
 }
 .metaText {
     text-align: center;
@@ -33,12 +30,12 @@
     .meta {
         flex-direction: row;
         column-gap: 16px;
-        :global(.ant-card-meta-avatar) {
-            padding-right: 16px;
-        }
     }
     .metaText {
         text-align: start;
+    }
+    .meta :global(.ant-card-meta-avatar) {
+        padding-right: 16px;
     }
 }
 .rateContainer {
@@ -47,9 +44,9 @@
     gap: 16px;
     align-items: center;
     font-size: 12px;
-    :global(.ant-typography) {
-        color: var(--character-light-disable-25);
-    }
+}
+.rateContainer :global(.ant-typography) {
+    color: var(--character-light-disable-25);
 }
 @media (max-width: 475px) {
     .rateContainer {
