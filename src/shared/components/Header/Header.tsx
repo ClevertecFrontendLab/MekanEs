@@ -10,9 +10,19 @@ export const AppHeader: FC<AppHeaderProps> = ({ mobile }) => {
     const location = useLocation();
     return (
         <div className={styles.Header}>
-            <Breadcrumb style={mobile ? { display: 'none' } : { lineHeight: '130%' }}>
+            <Breadcrumb
+                style={
+                    mobile
+                        ? location.pathname === '/feedbacks'
+                            ? {}
+                            : { display: 'none' }
+                        : { lineHeight: '130%' }
+                }
+            >
                 <Breadcrumb.Item>Главная</Breadcrumb.Item>
-                {location.pathname === '/feedbacks' && <Breadcrumb.Item>Отзывы</Breadcrumb.Item>}
+                {location.pathname === '/feedbacks' && (
+                    <Breadcrumb.Item>Отзывы пользователей</Breadcrumb.Item>
+                )}
             </Breadcrumb>
             {location.pathname === '/main' && (
                 <div className={styles.content}>

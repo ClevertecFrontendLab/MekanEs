@@ -8,7 +8,7 @@ import { defNavOption } from '@shared/constants/constants';
 import { ResultStatusType } from 'antd/lib/result';
 interface ResultFormProps {
     title: string;
-    subTitle: string;
+    subTitle: string | null;
     buttonText?: string;
     onClick?: () => void;
     redirect?: Paths;
@@ -18,6 +18,8 @@ interface ResultFormProps {
     verification?: ReactNode;
     buttonWidth?: string;
     addPadding?: boolean;
+    protectedRoute?: boolean;
+    extra?: ReactNode;
 }
 
 export const ResultForm: FC<ResultFormProps> = (props) => {
@@ -34,7 +36,9 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
         status,
         verification,
         buttonWidth,
+        extra = null,
         addPadding = false,
+        protectedRoute = true,
     } = props;
     const nav = useNavigate();
     const handleClick = () => {
@@ -45,7 +49,9 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
     };
 
     if (location?.state?.from !== defNavOption.state.from) {
-        return <Navigate to={Paths.AUTH} />;
+        if (protectedRoute) {
+            return <Navigate to={Paths.AUTH} />;
+        }
     }
 
     return (
@@ -56,7 +62,9 @@ export const ResultForm: FC<ResultFormProps> = (props) => {
                 title={title}
                 subTitle={subTitle}
                 extra={
-                    verification ? (
+                    extra ? (
+                        extra
+                    ) : verification ? (
                         verification
                     ) : (
                         <Button

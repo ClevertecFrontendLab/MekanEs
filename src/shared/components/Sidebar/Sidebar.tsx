@@ -19,7 +19,7 @@ interface SidebarProps {
     setMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
-    const [collapsed, setCollapsed] = useState(mobile ? true : false);
+    const [collapsed, setCollapsed] = useState(false);
     const dispatch = useAppDispatch();
     const handleToggle = useCallback(() => {
         setCollapsed((prev) => !prev);
@@ -27,6 +27,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
 
     const handleBreak = (broken: boolean) => {
         setMobile(broken);
+        setCollapsed(true);
     };
 
     return (

@@ -1,166 +1,107 @@
-import { authActions } from '@modules/auth/model/authSlice';
-import { FeedbackCard, useGetFeedbackQuery } from '@modules/feedback';
-import { MyFeedBack } from '@modules/feedback/ui/MyFeedBack/MyFeedBack';
-import { LoaderModal } from '@shared/components';
-import { LS_AuthKey } from '@shared/constants/constants';
-import { useAppDispatch } from '@shared/hooks';
-import { Button, Modal, Result } from 'antd';
-import { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FeedbackCard, FeedbackModals, useGetFeedbackQuery } from '@modules/feedback';
+import { Button, Card, Typography } from 'antd';
+import clx from 'classnames';
+import { FC, useRef, useState } from 'react';
+import styles from './Feedback.module.css';
 
 export const Feedback: FC = () => {
-    const nav = useNavigate();
-    const dispatch = useAppDispatch();
+    const container = useRef<HTMLDivElement>(null);
     const [opened, setOpened] = useState(false);
     const [openModal, setOpenModal] = useState(false);
-    const [errorModal, setErrorModal] = useState(false);
-    const [successModal, setSuccessModal] = useState(false);
-    const [postErrorModal, setPostErrorModal] = useState(false);
-    const { data, isFetching, refetch, error } = useGetFeedbackQuery();
+    const [itemsCount, setItemsCount] = useState(30);
+    const { data: feedbacks, isFetching, refetch, error } = useGetFeedbackQuery();
 
-    const feedbacks = data;
-    const activeFB = feedbacks && (opened ? feedbacks : feedbacks.slice(0, 4));
-    useEffect(() => {
-        if (error) {
-            if ('status' in error && error.status === 403) {
-                localStorage.removeItem(LS_AuthKey);
-                dispatch(authActions.setAuthToken(null));
-                setErrorModal(false);
-            } else {
-                console.log('modal open');
-                setErrorModal(true);
+    const activeFB = feedbacks && (opened ? feedbacks.slice(0, itemsCount) : feedbacks.slice(0, 4));
+    const handleScroll = () => {
+        if (container.current) {
+            if (container.current.scrollHeight / 1.5 <= container.current.scrollTop) {
+                console.log('add', itemsCount);
+                setItemsCount((prev) => {
+                    if (feedbacks && prev < feedbacks.length - 20) {
+                        return prev + 20;
+                    }
+                    return feedbacks?.length || 0;
+                });
             }
-        } else {
-            console.log('modal close');
-
-            setErrorModal(false);
         }
-    }, [error, dispatch]);
+    };
     return (
         <>
-            {isFetching && <LoaderModal />}
-            <Modal open={postErrorModal} centered footer={null} closable={false}>
-                <Result
-                    status='error'
-                    title='Данные не сохранились'
-                    subTitle='Что-то пошло не так. Попробуйте ещё раз.'
-                    extra={
-                        <>
-                            <Button
-                                data-test-id='write-review-not-saved-modal'
-                                onClick={() => {
-                                    setPostErrorModal(false);
-                                    setOpenModal(true);
-                                }}
-                                type='primary'
-                            >
-                                Написать отзыв
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    setPostErrorModal(false);
-                                }}
-                                type='primary'
-                            >
-                                Закрыть
-                            </Button>
-                        </>
-                    }
-                />
-            </Modal>
-            <Modal open={successModal} centered footer={null} closable={false}>
-                <Result
-                    status='success'
-                    title='Отзыв успешно опубликован'
-                    subTitle={null}
-                    extra={
-                        <Button
-                            onClick={() => {
-                                setSuccessModal(false);
-                            }}
-                            type='primary'
-                        >
-                            Отлично
-                        </Button>
-                    }
-                />
-            </Modal>
-            <Modal open={errorModal} centered footer={null} closable={false}>
-                <Result
-                    status='404'
-                    title='Что-то пошло не так'
-                    subTitle='Произошла ошибка, попробусте ещё раз'
-                    extra={
-                        <Button
-                            onClick={() => {
-                                setErrorModal(false);
-                                nav('/main');
-                            }}
-                            type='primary'
-                        >
-                            Назад
-                        </Button>
-                    }
-                />
-            </Modal>
-
-            <MyFeedBack
-                openModal={openModal}
-                setSuccess={() => {
-                    setSuccessModal(true);
+            <FeedbackModals
+                error={error}
+                isFetching={isFetching}
+                refetch={refetch}
+                writeFBModal={openModal}
+                openFB={() => {
+                    setOpenModal(true);
                 }}
-                setError={() => {
-                    setPostErrorModal(true);
-                }}
-                closeModal={() => {
+                closeFB={() => {
                     setOpenModal(false);
-                }}
-                refetch={() => {
-                    refetch();
                 }}
             />
             <div
-                style={{
-                    overflowY: 'scroll',
-                    height: '500px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                }}
+                className={clx(styles.content, {
+                    [styles.centered]: activeFB && activeFB.length === 0,
+                })}
             >
                 {activeFB && activeFB.length > 0 ? (
                     <>
-                        <div>
+                        <div className={styles.feedbacks} ref={container} onScroll={handleScroll}>
                             {activeFB.map((el) => (
                                 <FeedbackCard key={el.id} feedback={el} />
                             ))}
                         </div>
+                    </>
+                ) : (
+                    <Card className={styles.card}>
+                        <Typography.Title
+                            style={{ color: 'var(--primary-light-9)' }}
+                            level={3}
+                            className={styles.title}
+                        >
+                            Оставьте свой отзыв первым
+                        </Typography.Title>
+                        <Typography.Text
+                            className={styles.text}
+                            style={{ color: 'var(--character-light-secondary-45)' }}
+                        >
+                            Вы можете быть первым, кто оставит отзыв об этом фитнесс приложении.
+                            <br />
+                            Поделитесь своим мнением и опытом с другими пользователями,
+                            <br /> и помогите им сделать правильный выбор.
+                        </Typography.Text>
+                    </Card>
+                )}
+                <div
+                    className={clx(
+                        { [styles.buttonContainer]: activeFB && activeFB?.length > 0 },
+                        { [styles.altBtnContainer]: activeFB && activeFB.length === 0 },
+                    )}
+                >
+                    <Button
+                        className={clx(styles.btn)}
+                        type='primary'
+                        style={{ backgroundColor: 'var(--primary-light-6)' }}
+                        data-test-id='write-review'
+                        onClick={() => setOpenModal((prev) => !prev)}
+                    >
+                        Написать отзыв
+                    </Button>
+                    {activeFB && activeFB.length > 0 ? (
                         <Button
+                            style={{ color: 'var(--primary-light-6)' }}
+                            className={styles.btn}
+                            type='link'
                             data-test-id='all-reviews-button'
-                            onClick={() => setOpened((prev) => !prev)}
+                            onClick={() => {
+                                setOpened((prev) => !prev);
+                                setItemsCount(20);
+                            }}
                         >
                             {opened ? 'Свернуть все отзывы' : 'Развернуть все отзывы'}
                         </Button>
-
-                        <Button
-                            data-test-id='write-review'
-                            onClick={() => setOpenModal((prev) => !prev)}
-                        >
-                            Написать отзыв
-                        </Button>
-                    </>
-                ) : (
-                    <div>
-                        <span>Нет отзывов</span>
-
-                        <Button
-                            data-test-id='write-review'
-                            onClick={() => setOpenModal((prev) => !prev)}
-                        >
-                            Написать отзыв
-                        </Button>
-                    </div>
-                )}
+                    ) : null}
+                </div>
             </div>
         </>
     );
