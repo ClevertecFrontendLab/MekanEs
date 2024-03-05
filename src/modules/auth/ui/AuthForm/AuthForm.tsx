@@ -14,7 +14,7 @@ import {
     emailRule,
     passwordRule,
 } from '@shared/constants/constants';
-import { Paths } from '@shared/types/common';
+import { HttpStatusCode, Paths } from '@shared/types/common';
 import { CustomResponseError } from '@shared/types/common';
 import { useCheckEmailMutation, useLoginMutation } from '@modules/auth';
 import { LoaderModal } from '@shared/components';
@@ -70,7 +70,10 @@ const AuthForm: FC = () => {
                     });
                 })
                 .catch((e: CustomResponseError) => {
-                    if (e?.status === 404 && e?.data?.message === 'Email не найден') {
+                    if (
+                        e?.status === HttpStatusCode.NOT_FOUND &&
+                        e?.data?.message === 'Email не найден'
+                    ) {
                         navigate(Paths.RESULT_ERROR_NO_EMAIL, defNavOption);
                     } else {
                         navigate(Paths.RESULT_ERROR_CHECK_EMAIL, defNavOption);
@@ -166,9 +169,7 @@ const AuthForm: FC = () => {
                         </Button>{' '}
                     </Form.Item>
                     <Button
-                        onClick={() => {
-                            onAuthGoogle();
-                        }}
+                        onClick={() => onAuthGoogle()}
                         className={Fstyles.googleBtn}
                         icon={<GooglePlusOutlined />}
                         style={{ height: '40px' }}

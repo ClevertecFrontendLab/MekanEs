@@ -1,13 +1,8 @@
 import { FC } from 'react';
 import { ResultForm } from '@shared/components';
-
 import { Paths } from '@shared/types/common';
 
-interface ErrorCheckEmailNoEmailProps {
-    className?: string;
-}
-
-export const ErrorCheckEmailNoEmail: FC<ErrorCheckEmailNoEmailProps> = () => {
+export const ErrorCheckEmailNoEmail: FC = () => {
     return (
         <ResultForm
             status={'error'}

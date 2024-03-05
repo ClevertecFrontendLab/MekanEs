@@ -3,11 +3,7 @@ import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
 
-interface ErrorChangePasswordProps {
-    className?: string;
-}
-
-export const ErrorChangePassword: FC<ErrorChangePasswordProps> = () => {
+export const ErrorChangePassword: FC = () => {
     return (
         <ResultForm
             status={'error'}

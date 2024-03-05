@@ -5,11 +5,12 @@ import { ServerFeedback } from '@shared/types/feedback';
 import { UserOutlined } from '@ant-design/icons';
 import { RateCharacter } from '@shared/components/RateCharacter/RateCharacter';
 
-interface FeedbackCardProps {
+type FeedbackCardProps= {
     feedback: ServerFeedback;
 }
 
 export const FeedbackCard: FC<FeedbackCardProps> = ({ feedback }) => {
+    const formatedDate = feedback.createdAt.slice(0, 10).split('-').reverse().join('.');
     return (
         <Card className={styles.FeedbackCard}>
             <Card.Meta
@@ -50,9 +51,7 @@ export const FeedbackCard: FC<FeedbackCardProps> = ({ feedback }) => {
                         }
                     />
 
-                    <Typography.Text>
-                        {feedback.createdAt.slice(0, 10).split('-').reverse().join('.')}
-                    </Typography.Text>
+                    <Typography.Text>{formatedDate}</Typography.Text>
                 </div>
                 <Typography.Text
                     style={{

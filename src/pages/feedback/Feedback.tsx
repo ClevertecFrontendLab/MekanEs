@@ -1,30 +1,17 @@
 import { FeedbackCard, FeedbackModals, useGetFeedbackQuery } from '@modules/feedback';
 import { Button, Card, Typography } from 'antd';
 import clx from 'classnames';
-import { FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import styles from './Feedback.module.css';
 
 export const Feedback: FC = () => {
-    const container = useRef<HTMLDivElement>(null);
     const [opened, setOpened] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [itemsCount, setItemsCount] = useState(30);
     const { data: feedbacks, isFetching, refetch, error } = useGetFeedbackQuery();
 
     const activeFB = feedbacks && (opened ? feedbacks.slice(0, itemsCount) : feedbacks.slice(0, 4));
-    const handleScroll = () => {
-        if (container.current) {
-            if (container.current.scrollHeight / 1.5 <= container.current.scrollTop) {
-                console.log('add', itemsCount);
-                setItemsCount((prev) => {
-                    if (feedbacks && prev < feedbacks.length - 20) {
-                        return prev + 20;
-                    }
-                    return feedbacks?.length || 0;
-                });
-            }
-        }
-    };
+
     return (
         <>
             <FeedbackModals
@@ -46,9 +33,12 @@ export const Feedback: FC = () => {
             >
                 {activeFB && activeFB.length > 0 ? (
                     <>
-                        <div className={styles.feedbacks} ref={container} onScroll={handleScroll}>
+                        <div className={styles.feedbacks}>
                             {activeFB.map((el) => (
-                                <FeedbackCard key={el.id} feedback={el} />
+                                <FeedbackCard
+                                    key={el.id || new Date().getMilliseconds()}
+                                    feedback={el}
+                                />
                             ))}
                         </div>
                     </>

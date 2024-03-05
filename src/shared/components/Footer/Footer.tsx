@@ -12,9 +12,7 @@ export const AppFooter: FC = () => {
     return (
         <footer className={styles.Footer}>
             <Button
-                onClick={() => {
-                    nav(Paths.FEEDBACK);
-                }}
+                onClick={() => nav(Paths.FEEDBACK)}
                 type='link'
                 className={styles.linkbtn}
                 data-test-id='see-reviews'

@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 
-interface RegistrationErrorProps {
+type RegistrationErrorProps = {
     className?: string;
-}
+};
 
 export const RegistrationError: FC<RegistrationErrorProps> = () => {
     return (

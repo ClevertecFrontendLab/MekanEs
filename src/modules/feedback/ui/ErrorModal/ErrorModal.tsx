@@ -2,13 +2,13 @@ import { feedbackModalBodyStyle } from '@modules/feedback/model/constants';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 import Modal from 'antd/lib/modal/Modal';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-interface ErrorModalProps {
-    className?: string;
+type ErrorModalProps = {
     open: boolean;
     onClick: () => void;
-}
+    className?: string;
+};
 
 export const ErrorModal: FC<ErrorModalProps> = ({ className, open, onClick }) => {
     return (

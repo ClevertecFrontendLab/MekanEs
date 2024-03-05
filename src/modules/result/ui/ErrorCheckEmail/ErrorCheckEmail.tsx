@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 
-interface ErrorCheckEmailProps {
+type ErrorCheckEmailProps = {
     className?: string;
-}
+};
 
 export const ErrorCheckEmail: FC<ErrorCheckEmailProps> = () => {
     return (

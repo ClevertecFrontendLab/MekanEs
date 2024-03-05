@@ -6,21 +6,21 @@ import { Navigate, NavigateOptions, useLocation, useNavigate } from 'react-route
 import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
 import { ResultStatusType } from 'antd/lib/result';
-interface ResultFormProps {
+type ResultFormProps = {
     title: string;
     subTitle: string | null;
+    status: ResultStatusType;
     buttonText?: string;
     onClick?: () => void;
     redirect?: Paths;
     id?: string;
     redirectOpt?: NavigateOptions;
-    status: ResultStatusType;
     verification?: ReactNode;
     buttonWidth?: string;
     addPadding?: boolean;
     protectedRoute?: boolean;
     extra?: ReactNode;
-}
+};
 
 export const ResultForm: FC<ResultFormProps> = (props) => {
     const location = useLocation();

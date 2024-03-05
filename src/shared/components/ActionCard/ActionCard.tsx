@@ -4,11 +4,11 @@ import { Button, Divider, Typography } from 'antd';
 import clx from 'classnames';
 import { TextContainer } from '../index';
 
-interface ActionCardProps {
+type ActionCardProps = {
     title: string;
     buttonText: string;
     icon: ReactNode;
-}
+};
 
 export const ActionCard: FC<ActionCardProps> = ({ title, buttonText, icon }) => {
     return (

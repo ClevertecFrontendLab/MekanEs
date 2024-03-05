@@ -6,19 +6,19 @@ import { ErrorModal } from '../ErrorModal/ErrorModal';
 import { MyFeedBack } from '../MyFeedBack/MyFeedBack';
 import { LS_AuthKey } from '@shared/constants/constants';
 import { useAppDispatch } from '@shared/hooks';
-import { CustomResponseError } from '@shared/types/common';
+import { CustomResponseError, HttpStatusCode } from '@shared/types/common';
 import { SerializedError } from '@reduxjs/toolkit';
 import { authActions } from '@modules/auth/model/authSlice';
 import { LoaderModal } from '@shared/components';
 import { Button } from 'antd';
-interface FeedbackModalsProps {
+type FeedbackModalsProps = {
     error: CustomResponseError | SerializedError | undefined;
     isFetching: boolean;
     refetch: () => void;
     writeFBModal: boolean;
     openFB: () => void;
     closeFB: () => void;
-}
+};
 
 export const FeedbackModals: FC<FeedbackModalsProps> = ({
     error,
@@ -35,16 +35,12 @@ export const FeedbackModals: FC<FeedbackModalsProps> = ({
     const [postErrorModal, setPostErrorModal] = useState(false);
 
     useEffect(() => {
-        if (error) {
-            if ('status' in error && error.status === 403) {
-                localStorage.removeItem(LS_AuthKey);
-                dispatch(authActions.setAuthToken(null));
-                setErrorModal(false);
-            } else {
-                setErrorModal(true);
-            }
-        } else {
+        if (error && 'status' in error && error.status === HttpStatusCode.FORBIDDEN) {
+            localStorage.removeItem(LS_AuthKey);
+            dispatch(authActions.setAuthToken(null));
             setErrorModal(false);
+        } else {
+            setErrorModal(Boolean(error));
         }
     }, [error, dispatch]);
     return (

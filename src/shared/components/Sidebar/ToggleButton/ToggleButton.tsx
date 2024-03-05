@@ -3,7 +3,7 @@ import styles from '../Sidebar.module.css';
 import { Button } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-interface ToggleButtonProps {
+type ToggleButtonProps= {
     handler: () => void;
     mobile: boolean;
     collapsed: boolean;

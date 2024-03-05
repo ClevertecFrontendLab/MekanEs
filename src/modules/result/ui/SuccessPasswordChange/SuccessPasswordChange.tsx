@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { Paths } from '@shared/types/common';
 import { ResultForm } from '@shared/components';
 
-interface SuccesPasswordChangeProps {
-    className?: string;
-}
-
-export const SuccesPasswordChange: FC<SuccesPasswordChangeProps> = () => {
+export const SuccesPasswordChange: FC = () => {
     return (
         <ResultForm
             status={'success'}

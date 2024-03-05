@@ -13,9 +13,9 @@ import { LoaderModal } from '@shared/components';
 import { defNavOption, passwordRule } from '@shared/constants/constants';
 import { getChangeValues } from '@modules/auth/model/authSelectors';
 
-export interface ConfirmPassword {
+export type ConfirmPassword = {
     password: string;
-}
+};
 const AuthChangePassword: FC = () => {
     const [changePassword, { isLoading }] = useChangePasswordMutation();
     const location = useLocation();

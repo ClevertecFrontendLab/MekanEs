@@ -25,3 +25,7 @@ export interface CustomResponseError {
         message: string;
     };
 }
+export enum HttpStatusCode {
+    FORBIDDEN = 403,
+    NOT_FOUND = 404,
+}

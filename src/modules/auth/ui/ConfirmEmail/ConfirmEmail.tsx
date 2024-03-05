@@ -9,11 +9,7 @@ import { Paths } from '@shared/types/common';
 import { defNavOption } from '@shared/constants/constants';
 import { LoaderModal, ResultForm } from '@shared/components';
 
-interface ConfirmEmailProps {
-    className?: string;
-}
-
-export const ConfirmEmail: FC<ConfirmEmailProps> = () => {
+export const ConfirmEmail: FC = () => {
     const location = useLocation();
     const nav = useNavigate();
     const [confirmEmail, { isLoading, error }] = useConfirmEmailMutation();

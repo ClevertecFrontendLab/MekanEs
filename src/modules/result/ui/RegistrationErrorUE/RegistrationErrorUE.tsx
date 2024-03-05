@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 
-interface RegistrationErrorUEProps {
-    className?: string;
-}
-
-export const RegistrationErrorUE: FC<RegistrationErrorUEProps> = () => {
+export const RegistrationErrorUE: FC = () => {
     return (
         <ResultForm
             status={'error'}

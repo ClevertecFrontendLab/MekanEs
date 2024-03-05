@@ -5,13 +5,13 @@ import { Portal } from '../Portal/Portal';
 import { Button, Card } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 
-interface ModalProps {
+type ModalProps = {
     bgClassName: string;
     children: ReactNode;
     withCloseButton: boolean;
     isOpened?: boolean;
     closeModal: () => void;
-}
+};
 
 export const Modal = memo((props: ModalProps) => {
     const { children, withCloseButton, isOpened, bgClassName, closeModal } = props;

@@ -3,11 +3,11 @@ import { ResultForm } from '@shared/components';
 import Modal from 'antd/lib/modal/Modal';
 import { FC } from 'react';
 
-interface SuccessModalProps {
+type SuccessModalProps = {
     className?: string;
     open: boolean;
     onClick: () => void;
-}
+};
 
 export const SuccessModal: FC<SuccessModalProps> = ({ className, open, onClick }) => {
     return (

@@ -3,9 +3,10 @@ import styles from './Header.module.css';
 import { Breadcrumb, Button, Typography } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
-interface AppHeaderProps {
+import { Paths } from '@shared/types/common';
+type AppHeaderProps = {
     mobile: boolean;
-}
+};
 export const AppHeader: FC<AppHeaderProps> = ({ mobile }) => {
     const location = useLocation();
     return (
@@ -20,7 +21,7 @@ export const AppHeader: FC<AppHeaderProps> = ({ mobile }) => {
                 }
             >
                 <Breadcrumb.Item>Главная</Breadcrumb.Item>
-                {location.pathname === '/feedbacks' && (
+                {location.pathname === Paths.FEEDBACK && (
                     <Breadcrumb.Item>Отзывы пользователей</Breadcrumb.Item>
                 )}
             </Breadcrumb>

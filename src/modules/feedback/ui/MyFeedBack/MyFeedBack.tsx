@@ -5,13 +5,13 @@ import { RateCharacter } from '@shared/components/RateCharacter/RateCharacter';
 import { usePostFeedbackMutation } from '@modules/feedback/api/feedbackApi';
 import { LoaderModal } from '@shared/components';
 
-interface MyFeedBackProps {
+type MyFeedBackProps = {
     openModal: boolean;
     closeModal: () => void;
     refetch: () => void;
     setSuccess: () => void;
     setError: () => void;
-}
+};
 
 export const MyFeedBack: FC<MyFeedBackProps> = ({
     openModal,
@@ -24,12 +24,24 @@ export const MyFeedBack: FC<MyFeedBackProps> = ({
     const [canSend, setCanSend] = useState(false);
     const [myRate, setMyRate] = useState(0);
     const [myFeedBack, setMyFeedBack] = useState('');
+    const handlePost = () => {
+        closeModal();
+
+        post({ rating: myRate, message: myFeedBack })
+            .unwrap()
+            .then(() => {
+                refetch();
+                setSuccess();
+                setMyRate(0);
+                setMyFeedBack('');
+            })
+            .catch(() => {
+                setError();
+            });
+    };
     useEffect(() => {
-        if (myRate > 0) {
-            setCanSend(true);
-        } else {
-            setCanSend(false);
-        }
+        const isRate = myRate > 0;
+        setCanSend(isRate);
     }, [myRate, myFeedBack]);
     return (
         <>
@@ -50,21 +62,7 @@ export const MyFeedBack: FC<MyFeedBackProps> = ({
                             className={styles.postBtn}
                             data-test-id='new-review-submit-button'
                             type='primary'
-                            onClick={() => {
-                                closeModal();
-
-                                post({ rating: myRate, message: myFeedBack })
-                                    .unwrap()
-                                    .then(() => {
-                                        refetch();
-                                        setSuccess();
-                                        setMyRate(0);
-                                        setMyFeedBack('');
-                                    })
-                                    .catch(() => {
-                                        setError();
-                                    });
-                            }}
+                            onClick={handlePost}
                         >
                             Опубликовать
                         </Button>

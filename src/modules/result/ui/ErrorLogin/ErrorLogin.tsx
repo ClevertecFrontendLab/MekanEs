@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 
-interface ErrorLoginProps {
+type ErrorLoginProps = {
     className?: string;
-}
+};
 
 export const ErrorLogin: FC<ErrorLoginProps> = () => {
     return (

@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { ResultForm } from '@shared/components';
 import { Paths } from '@shared/types/common';
 
-interface RegistrationSuccesProps {
-    className?: string;
-}
-
-export const RegistrationSucces: FC<RegistrationSuccesProps> = () => {
+export const RegistrationSucces: FC = () => {
     return (
         <ResultForm
             status={'success'}
