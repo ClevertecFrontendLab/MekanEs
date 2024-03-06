@@ -1,34 +1,36 @@
-import { Route, Routes } from 'react-router-dom';
-import { Auth, MainPage } from '@pages/index';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Auth, MainPage, NotFound } from '@pages/index';
+
+import { AppLayout } from '@shared/components';
+import { Paths } from '@shared/types/common';
+import { AuthChangePassword, AuthProvider, ConfirmEmail, ErrorLogin } from '@modules/auth';
 import {
-    AuthChangePassword,
-    AuthProvider,
-    ConfirmEmail,
     ErrorChangePassword,
     ErrorCheckEmail,
     ErrorCheckEmailNoEmail,
-    ErrorLogin,
     RegistrationError,
     RegistrationErrorUE,
     RegistrationSucces,
+    ResultProvider,
     SuccesPasswordChange,
-} from '@modules/auth';
-import { AppLayout } from '@shared/components';
-import { Paths } from '@shared/types/common';
-import { ResultProvider } from '@modules/auth/ui/Results/ResultProvider/ResultProvider';
+} from '@modules/result';
+import { Feedback } from '@pages/feedback/Feedback';
 
 export const routes = (
     <Routes>
         <Route path={Paths.BASE} element={<AppLayout />}>
-            <Route element={<AuthProvider passIf={false} redirect={Paths.AUTH} />}>
+            <Route element={<AuthProvider passIf={false} redirectPath={Paths.AUTH} />}>
                 <Route path={Paths.MAIN} element={<MainPage />} />
+                <Route path={Paths.FEEDBACK} element={<Feedback />} />
             </Route>
         </Route>
-        <Route element={<AuthProvider withLayout passIf={true} redirect={Paths.MAIN} />}>
+
+        <Route element={<AuthProvider withLayout passIf={true} redirectPath={Paths.MAIN} />}>
             <Route path={Paths.REGISTRATION} element={<Auth />} />
             <Route path={Paths.AUTH} element={<Auth />} />
         </Route>
-        <Route element={<AuthProvider passIf={true} redirect={Paths.MAIN} />}>
+
+        <Route element={<AuthProvider passIf={true} redirectPath={Paths.MAIN} />}>
             <Route element={<ResultProvider />}>
                 <Route path={Paths.AUTH_CHANGE_PASSWORD} element={<AuthChangePassword />} />
                 <Route path={Paths.RESULT_ERROR_LOGIN} element={<ErrorLogin />} />
@@ -48,5 +50,7 @@ export const routes = (
                 <Route path={Paths.RESULT_ERROR_CHECK_EMAIL} element={<ErrorCheckEmail />} />
             </Route>
         </Route>
+        <Route path='*' element={<Navigate to={Paths.NOT_FOUND} />} />
+        <Route path={Paths.NOT_FOUND} element={<NotFound />} />
     </Routes>
 );

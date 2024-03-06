@@ -1,0 +1,55 @@
+.FeedbackCard :global(.ant-card-body) {
+    display: flex;
+    padding: 16px;
+    gap: 12px;
+}
+
+@media (max-width: 475px) {
+    .FeedbackCard :global(.ant-card-body) {
+        flex-direction: column;
+    }
+}
+
+.meta {
+    display: flex;
+    flex-direction: column;
+    text-wrap: wrap;
+    align-items: center;
+    row-gap: 12px;
+    min-width: 174px;
+}
+.meta :global(.ant-card-meta-avatar) {
+    padding: 0;
+}
+.metaText {
+    text-align: center;
+    display: block;
+    text-wrap: balance;
+}
+@media (max-width: 475px) {
+    .meta {
+        flex-direction: row;
+        column-gap: 16px;
+    }
+    .metaText {
+        text-align: start;
+    }
+    .meta :global(.ant-card-meta-avatar) {
+        padding-right: 16px;
+    }
+}
+.rateContainer {
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 12px;
+}
+.rateContainer :global(.ant-typography) {
+    color: var(--character-light-disable-25);
+}
+@media (max-width: 475px) {
+    .rateContainer {
+        margin-bottom: 16px;
+    }
+}

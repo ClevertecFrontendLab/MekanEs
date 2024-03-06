@@ -7,6 +7,7 @@ import { TextContainer } from './TextContainer/TextContainer';
 import { AppLayout } from './Layout/layout';
 import { Loader } from './Loader/Loader';
 import { LoaderModal } from './Loader/LoaderModal';
+import { ResultForm } from './ResultForm/ResultForm';
 
 export {
     Sidebar,
@@ -18,4 +19,5 @@ export {
     AppLayout,
     Loader,
     LoaderModal,
+    ResultForm,
 };

@@ -1,0 +1,14 @@
+@media (max-width: 475px) {
+    .modal :global(.ant-modal-header) {
+        padding: 16px;
+    }
+}
+.textArea {
+    resize: vertical !important;
+}
+
+@media (max-width: 475px) {
+    .postBtn {
+        width: 100%;
+    }
+}

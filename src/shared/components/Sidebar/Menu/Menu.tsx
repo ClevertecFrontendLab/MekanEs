@@ -4,7 +4,7 @@ import styles from '../Sidebar.module.css';
 import { Menu } from 'antd';
 import { CalendarTwoTone, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 
-interface AppMenuProps {
+type AppMenuProps= {
     mobile: boolean;
 }
 

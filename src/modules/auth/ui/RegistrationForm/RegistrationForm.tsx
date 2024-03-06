@@ -10,45 +10,37 @@ import { LoaderModal } from '@shared/components';
 import { getRegValues } from '@modules/auth/model/authSelectors';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { authActions } from '@modules/auth/model/authSlice';
-import { defNavOption } from '@shared/constants/constants';
+import { defNavOption, emailRule, passwordRule } from '@shared/constants/constants';
 import { GooglePlusOutlined } from '@ant-design/icons';
 
-// interface RegistrationFormProps {
-//     className?: string;
-// }
-
-export const RegistrationForm: FC = () => {
+const RegistrationForm: FC = () => {
     const [disabledSave, setDisabledSave] = useState(false);
     const location = useLocation();
     const regValues = useAppSelector(getRegValues);
     const dispatch = useAppDispatch();
-    const [register, { isLoading, error }] = useRegisterMutation();
+    const [register, { isLoading }] = useRegisterMutation();
     const navigate = useNavigate();
     const onFinish = useCallback(
         async (values: LoginProps) => {
             if (!disabledSave) {
-                try {
-                    dispatch(authActions.setRegValues(values));
-                    await register(values).unwrap();
-
-                    navigate(Paths.RESULT_SUCCESS, defNavOption);
-                } catch (e) {
-                    console.log(e);
-                }
+                dispatch(authActions.setRegValues(values));
+                register(values)
+                    .unwrap()
+                    .then(() => {
+                        navigate(Paths.RESULT_SUCCESS, defNavOption);
+                    })
+                    .catch((e: CustomResponseError) => {
+                        if (e?.status === 409) {
+                            navigate(Paths.RESULT_ERROR_US_EXIST, defNavOption);
+                        } else {
+                            navigate(Paths.RESULT_ERROR, defNavOption);
+                        }
+                    });
             }
         },
         [dispatch, navigate, register, disabledSave],
     );
-    useEffect(() => {
-        if (error) {
-            const err = error as CustomResponseError;
-            if (err?.status === 409) {
-                navigate(Paths.RESULT_ERROR_US_EXIST, defNavOption);
-            } else {
-                navigate(Paths.RESULT_ERROR, defNavOption);
-            }
-        }
-    }, [error, navigate]);
+
     useEffect(() => {
         if (location?.state?.action === 'register') {
             if (regValues) onFinish(regValues);
@@ -79,16 +71,7 @@ export const RegistrationForm: FC = () => {
         >
             {isLoading && <LoaderModal />}
             <div className={clx(Fstyles.inputs, Fstyles.margin)}>
-                <Form.Item
-                    name='email'
-                    rules={[
-                        {
-                            required: true,
-                            type: 'email',
-                            message: <></>,
-                        },
-                    ]}
-                >
+                <Form.Item name='email' rules={[emailRule]}>
                     <Input
                         data-test-id='registration-email'
                         autoComplete='username'
@@ -103,12 +86,14 @@ export const RegistrationForm: FC = () => {
                         </div>
                     }
                     rules={[
+                        passwordRule,
                         {
-                            required: true,
-                            min: 8,
-                            pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'),
+                            message: (
+                                <div className={Fstyles.help}>
+                                    Пароль не менее 8 символов, с заглавной буквой и цифрой
+                                </div>
+                            ),
                         },
-                        { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
                     ]}
                 >
                     <Input.Password
@@ -169,3 +154,4 @@ export const RegistrationForm: FC = () => {
         </Form>
     );
 };
+export default RegistrationForm;

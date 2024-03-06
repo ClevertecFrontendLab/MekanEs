@@ -2,19 +2,19 @@ import { type ReactNode, useEffect, memo, useState } from 'react';
 import clx from 'classnames';
 import styles from './Modal.module.css';
 import { Portal } from '../Portal/Portal';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
-interface ModalProps {
-    className?: string;
+type ModalProps = {
+    bgClassName: string;
     children: ReactNode;
-    isOpened: boolean;
-    closeModal?: () => void;
-    lazy?: boolean;
-    bg?: string;
-}
+    withCloseButton: boolean;
+    isOpened?: boolean;
+    closeModal: () => void;
+};
 
 export const Modal = memo((props: ModalProps) => {
-    const { className, children, isOpened, closeModal, lazy, bg } = props;
+    const { children, withCloseButton, isOpened, bgClassName, closeModal } = props;
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => {
         if (isOpened) {
@@ -25,28 +25,28 @@ export const Modal = memo((props: ModalProps) => {
         e.stopPropagation();
     };
 
-    if (!isMounted && lazy) {
+    if (!isMounted) {
         return null;
     }
     return (
         <Portal>
-            <div className={clx(styles.Modal, { [styles.opened]: isOpened }, [className])}>
-                <div
-                    className={clx(styles.overlay)}
-                    onClick={() => {
-                        closeModal?.();
-                    }}
+            <div onClick={closeModal} className={clx(styles.Modal, bgClassName)}>
+                <Card
+                    className={clx(styles.content, {
+                        [styles.showContent]: isOpened,
+                    })}
+                    onClick={stopPropagation}
                 >
-                    <div className={styles.bg} style={{ backgroundImage: `url(${bg})` }}></div>
-                    <Card
-                        className={clx(styles.content, {
-                            [styles.showContent]: isOpened,
-                        })}
-                        onClick={stopPropagation}
-                    >
-                        {children}
-                    </Card>
-                </div>
+                    {withCloseButton && (
+                        <Button
+                            className={styles.closeBtn}
+                            onClick={closeModal}
+                            icon={<CloseCircleOutlined />}
+                            type='default'
+                        />
+                    )}
+                    {children}
+                </Card>
             </div>
         </Portal>
     );

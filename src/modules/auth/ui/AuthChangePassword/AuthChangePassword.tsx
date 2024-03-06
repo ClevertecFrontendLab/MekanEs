@@ -10,43 +10,36 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@shared/types/common';
 import { useChangePasswordMutation } from '../../authApi/authApi';
 import { LoaderModal } from '@shared/components';
-import { defNavOption } from '@shared/constants/constants';
+import { defNavOption, passwordRule } from '@shared/constants/constants';
 import { getChangeValues } from '@modules/auth/model/authSelectors';
 
-export interface ConfirmPassword {
+export type ConfirmPassword = {
     password: string;
-}
-export const AuthChangePassword: FC = () => {
-    const [changePassword, { isLoading, error: changePasswordError }] = useChangePasswordMutation();
-    const [error, setError] = useState(false);
+};
+const AuthChangePassword: FC = () => {
+    const [changePassword, { isLoading }] = useChangePasswordMutation();
     const location = useLocation();
     const changeValues = useAppSelector(getChangeValues);
     const [disabledSave, setDisabledSave] = useState(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const onFinish = useCallback(
-        async (values: ConfirmPassword) => {
-            try {
-                dispatch(authActions.setChangeValues(values));
-                const resp = await changePassword({
-                    password: values.password,
-                    confirmPassword: values.password,
+        (values: ConfirmPassword) => {
+            dispatch(authActions.setChangeValues(values));
+            changePassword({
+                password: values.password,
+                confirmPassword: values.password,
+            })
+                .unwrap()
+                .then(() => {
+                    navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
+                })
+                .catch(() => {
+                    navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
                 });
-                if ('error' in resp) {
-                    throw new Error();
-                }
-                navigate(Paths.RESULT_SUCCESS_CHANGE_PASSWORD, defNavOption);
-            } catch (e) {
-                setError(true);
-            }
         },
         [changePassword, dispatch, navigate],
     );
-    useEffect(() => {
-        if (changePasswordError || error) {
-            navigate(Paths.RESULT_ERROR_CHANGE_PASSWORD, defNavOption);
-        }
-    }, [navigate, changePasswordError, error]);
 
     useEffect(() => {
         if (location?.state?.action === 'changeAgain') {
@@ -55,7 +48,6 @@ export const AuthChangePassword: FC = () => {
     }, [changeValues, location, onFinish]);
 
     if (location?.state?.from !== defNavOption.state.from) {
-        console.log('redirecting');
         return <Navigate to={Paths.AUTH} />;
     }
     return (
@@ -90,12 +82,7 @@ export const AuthChangePassword: FC = () => {
                             </div>
                         }
                         rules={[
-                            {
-                                required: true,
-                                pattern: new RegExp(
-                                    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$',
-                                ),
-                            },
+                            passwordRule,
                             { message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой' },
                         ]}
                     >
@@ -146,3 +133,4 @@ export const AuthChangePassword: FC = () => {
         </Card>
     );
 };
+export default AuthChangePassword;

@@ -4,10 +4,19 @@ import { Button, Divider, Typography } from 'antd';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import Link from 'antd/lib/typography/Link';
 import clx from 'classnames';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@shared/types/common';
 export const AppFooter: FC = () => {
+    const nav = useNavigate();
+
     return (
         <footer className={styles.Footer}>
-            <Button type='link' className={styles.linkbtn}>
+            <Button
+                onClick={() => nav(Paths.FEEDBACK)}
+                type='link'
+                className={styles.linkbtn}
+                data-test-id='see-reviews'
+            >
                 Смотреть отзывы
             </Button>
             <div className={styles.rightSec}>

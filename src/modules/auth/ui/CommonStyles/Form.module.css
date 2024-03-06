@@ -3,6 +3,9 @@
     flex-direction: column;
     gap: 24px;
 }
+.Form :global(.ant-btn) {
+    font-size: 16px;
+}
 .inputs {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,17 @@
+.feedbackModal {
+    padding: 0;
+    width: auto !important;
+    max-width: 100%;
+}
+.feedbackModal :global(.ant-modal-content) {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+.btnContainer {
+    display: flex;
+    gap: 8px;
+}
+.button {
+    width: 50%;
+}

@@ -85,11 +85,11 @@
 }
 
 .formCard {
-    padding: 64px 85.5px;
+    padding: var(--result-desktop-padding);
     height: fit-content;
 }
 @media (max-width: 575px) {
     .formCard {
-        padding: 32px 16px;
+        padding: var(--result-mobile-padding);
     }
 }

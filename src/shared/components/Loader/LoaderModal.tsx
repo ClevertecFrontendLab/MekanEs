@@ -1,14 +1,10 @@
 import { FC } from 'react';
 import clx from 'classnames';
 import styles from './LoaderModal.module.css';
-import { Loader } from '..';
+import { Loader } from './Loader';
 import { Portal } from '../Portal/Portal';
 
-interface LoaderModalProps {
-    className?: string;
-}
-
-export const LoaderModal: FC<LoaderModalProps> = () => {
+export const LoaderModal: FC = () => {
     return (
         <Portal>
             <div className={clx(styles.LoaderModal)}>

@@ -3,7 +3,6 @@ import clx from 'classnames';
 import CStyles from '../CommonStyles/CommonStyles.module.css';
 
 import { Outlet, useLocation } from 'react-router-dom';
-import bgImage from '@shared/assets/images/auth-bg.png';
 import { useAppDispatch } from '@shared/hooks';
 import { push } from 'redux-first-history';
 
@@ -16,7 +15,7 @@ export const AuthLayout: FC = () => {
         }
     }, [location.pathname, dispatch]);
     return (
-        <div className={CStyles.bg} style={{ background: `url(${bgImage})` }}>
+        <div className={CStyles.bg}>
             <div className={clx(CStyles.overlay)}>
                 <Outlet />
             </div>

@@ -1,7 +1,15 @@
 .bg {
-    background-repeat: no-repeat;
+    background: url('../../../../shared/assets/images/auth-bg.png') no-repeat;
     background-size: cover;
     min-height: 100%;
+}
+.bg :global {
+    .ant-btn {
+        font-size: 16px;
+    }
+    .ant-input {
+        padding: 5px 0;
+    }
 }
 .overlay {
     width: 100%;

@@ -14,10 +14,10 @@ import { useAppDispatch } from '@shared/hooks';
 import { authActions } from '@modules/auth/model/authSlice';
 
 const { Sider } = Layout;
-interface SidebarProps {
+type SidebarProps = {
     mobile: boolean;
     setMobile: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useAppDispatch();
@@ -27,6 +27,7 @@ export const Sidebar: FC<SidebarProps> = ({ mobile, setMobile }) => {
 
     const handleBreak = (broken: boolean) => {
         setMobile(broken);
+        setCollapsed(true);
     };
 
     return (

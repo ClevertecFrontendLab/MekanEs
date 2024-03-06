@@ -1,0 +1,97 @@
+a.ant-typography {
+    height: auto;
+}
+
+h1.ant-typography,
+h2.ant-typography,
+h3.ant-typography,
+h4.ant-typography,
+h5.ant-typography,
+h6.ant-typography,
+.ant-typography {
+    line-height: var(--line-height);
+}
+
+h3.ant-typography {
+    font-weight: 500;
+}
+.buttonWithIcon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    outline: none;
+}
+.buttonWithIcon svg {
+    width: 13px;
+    height: 13px;
+    margin: 0;
+}
+.ant-card-body {
+    padding: 0;
+}
+.ant-tabs {
+    line-height: var(--line-height);
+}
+.ant-tabs-nav-list {
+    width: 100%;
+}
+.ant-tabs-tab {
+    width: 50%;
+    font-size: 16px;
+    padding: 0;
+}
+@media (max-width: 575px) {
+    .ant-tabs-tab {
+        font-size: 14px;
+    }
+}
+.ant-tabs-tab + .ant-tabs-tab {
+    margin: 0;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: var(--primary-light-6);
+}
+.ant-tabs-tab-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: inherit;
+}
+.ant-tabs-ink-bar {
+    background: var(--primary-light-6);
+}
+.ant-form-item {
+    margin-bottom: 16px;
+}
+.ant-input-affix-wrapper > .ant-input:not(textarea) {
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: var(--line-height);
+    color: var(--character-light-title-85);
+}
+
+.ant-input-affix-wrapper {
+    line-height: var(--line-height);
+}
+.ant-input-prefix {
+    padding: 0 4px;
+    margin-right: 8px;
+}
+
+.ant-result-icon > span {
+    padding: 4px;
+}
+.ant-result-title {
+    line-height: var(--line-height);
+}
+.ant-result-subtitle {
+    line-height: var(--line-height);
+}
+.ant-result-extra > * {
+    height: 40px;
+}
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar,
+.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+    min-width: 50%;
+}
